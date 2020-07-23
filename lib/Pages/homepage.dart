@@ -48,7 +48,7 @@ class _MyHomepageState extends State<MyHomepage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("Select Price", style: GoogleFonts.fredokaOne(fontSize: 20,color: Colors.white),)
+                    Text("Select Pricess", style: GoogleFonts.fredokaOne(fontSize: 20,color: Colors.white),)
                   ],
                 ),
               ),
