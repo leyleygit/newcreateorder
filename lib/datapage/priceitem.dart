@@ -22,14 +22,14 @@ class _PriceItemsState extends State<PriceItems> {
         height: 50,
         width: 50,
         decoration: BoxDecoration(
-          //border: Border.all(width: 2,color: Color(0xff091EAA)),
-          color: selectprice==true?Colors.white:Colors.grey.withOpacity(0.1),
+          border: Border.all(width: 2,color: Color(0xff0ED2F7)),
+          color: selectprice==true?Colors.blue.withOpacity(0.7):Colors.white,
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Center(
           child: Text(widget.pricecake,
             style: GoogleFonts.pacifico(
-                fontSize: 25, color: selectprice==true?Colors.black:Colors.white),
+                fontSize: 25, color: selectprice==true?Colors.white:Colors.black),
           ),
         ),
       ),

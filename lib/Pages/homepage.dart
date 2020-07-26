@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:new_createorder/datapage/coloritem.dart';
 import 'package:new_createorder/datapage/flavoritem.dart';
 import 'package:new_createorder/datapage/priceitem.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:new_createorder/datapage/shapeitem.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MyHomepage extends StatefulWidget {
   @override
@@ -58,7 +60,8 @@ class _MyHomepageState extends State<MyHomepage> {
     "ដូរយកមាស",
     "ដូរយកផ្កាឈូកដិត",
     "ដូចរូប",
-  ];List<String> nameshape = [
+  ];
+  List<String> nameshape = [
     "រាងលុយ",
     "ខ្ពស់",
     "*4 ស្រទាប់",
@@ -82,7 +85,8 @@ class _MyHomepageState extends State<MyHomepage> {
     final orientation = MediaQuery.of(context).orientation;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xff131313),
+//      backgroundColor: Color(0xff131313),
+      backgroundColor: Colors.white,
       body: Container(
         width: size.width,
         height: size.height,
@@ -90,17 +94,19 @@ class _MyHomepageState extends State<MyHomepage> {
           primary: false,
           slivers: <Widget>[
             SliverAppBar(
-              backgroundColor: Color(0xff131313),
+              //backgroundColor: Color(0xff131313),
+              backgroundColor: Colors.white,
               leading: Icon(
                 Icons.exit_to_app,
                 size: 30,
+                color: Colors.black,
               ),
               actions: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: Icon(
                     Icons.notifications,
-                    color: Colors.white,
+                    color: Colors.black,
                     size: 30,
                   ),
                 )
@@ -118,7 +124,7 @@ class _MyHomepageState extends State<MyHomepage> {
                       Text(
                         "Create Order",
                         style: GoogleFonts.pacifico(
-                            fontSize: 30, color: Colors.white),
+                            fontSize: 30, color: Colors.black),
                       )
                     ],
                   ),
@@ -126,56 +132,59 @@ class _MyHomepageState extends State<MyHomepage> {
               ),
             ),
             SliverToBoxAdapter(
-              child: Container(
-                //color: Colors.purple,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "Select Pricess",
-                        style: GoogleFonts.fredokaOne(
-                            fontSize: 20, color: Colors.white),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "តម្លៃនំ",
+                      style: GoogleFonts.fredokaOne(
+                          fontSize: 20, color: Colors.black),
+                    ),
+                    SizedBox(height: 3),
+                    Container(
+                      width: size.width * 1.0,
+                      height: size.height * 0.3,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        border: Border.all(width: 2,color: Color(0xff0ED2F7))
                       ),
-                      Container(
-                        width: size.width * 1.0,
-                        height: size.height * 0.3,
-                        // color: Colors.yellow,
-                        child: GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 4,
-                          ),
-                          itemCount: 12,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: PriceItems(
-                                pricecake: pricecake[index],
-                              ),
-                            );
-                          },
+                      // color: Colors.yellow,
+                      child: GridView.builder(
+                        gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4,
                         ),
+                        itemCount: 12,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: PriceItems(
+                              pricecake: pricecake[index],
+                            ),
+                          );
+                        },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
             SliverToBoxAdapter(
               child: Container(
                 height: size.height * 0.15,
-                //color: Colors.deepOrange,
+                //color: Color(0xff131313),
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Flavor",
+                        "រសជាតិ",
                         style: GoogleFonts.fredokaOne(
-                            fontSize: 20, color: Colors.white),
+                            fontSize: 20, color: Colors.black),
                       ),
                       Container(
                         //body listview
@@ -199,16 +208,17 @@ class _MyHomepageState extends State<MyHomepage> {
             SliverToBoxAdapter(
               child: Container(
                   height: size.height * 0.15,
-                  //color: Colors.yellow,
+                  color: Colors.white,
+                  //color: Color(0xff131313),
                   child: Padding(
                     padding: EdgeInsets.only(right: 10, left: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Color",
+                          "ពណ៍",
                           style: GoogleFonts.fredokaOne(
-                              fontSize: 20, color: Colors.white),
+                              fontSize: 20, color: Colors.black),
                         ),
                         Container(
                           //body listview
@@ -218,7 +228,9 @@ class _MyHomepageState extends State<MyHomepage> {
                               scrollDirection: Axis.horizontal,
                               itemCount: 10,
                               itemBuilder: (BuildContext context, int index) {
-                                return ColorItems(namecolor: namecolor[index],);
+                                return ColorItems(
+                                  namecolor: namecolor[index],
+                                );
                               }),
                         )
                       ],
@@ -229,24 +241,30 @@ class _MyHomepageState extends State<MyHomepage> {
               child: Container(
                 //BodySliverToBoxAdapter
                 height: size.height * 0.15,
-                //color: Colors.blue,
+                //color: Color(0xff131313),
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10, left: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Shape",
+                        "រូបរាង",
                         style: GoogleFonts.fredokaOne(
-                            fontSize: 20, color: Colors.white),
+                            fontSize: 20, color: Colors.black),
                       ),
                       Container(
                         //bodyListView
                         height: size.height * 0.1,
                         //color: Colors.white,
-                        child: ListView.builder(itemCount: 10,scrollDirection: Axis.horizontal,itemBuilder: (BuildContext context, int index){
-                          return ShapeItems(nameshape: nameshape[index],);
-                        }),
+                        child: ListView.builder(
+                            itemCount: 10,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ShapeItems(
+                                nameshape: nameshape[index],
+                              );
+                            }),
                       )
                     ],
                   ),
@@ -255,6 +273,17 @@ class _MyHomepageState extends State<MyHomepage> {
             )
           ],
         ),
+      ),
+      bottomNavigationBar: CurvedNavigationBar(
+        height: 45,
+        backgroundColor: Colors.white,
+        color: Color(0xff0ED2F7),
+        index: 1,
+        items: <Widget>[
+          Icon(MdiIcons.note, color: Colors.white,),
+          Icon(MdiIcons.home, color: Colors.white,),
+          Icon(MdiIcons.image, color: Colors.white,)
+        ],
       ),
     );
   }
