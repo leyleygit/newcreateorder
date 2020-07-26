@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class PriceItems extends StatefulWidget {
   final String pricecake;
 
@@ -7,32 +9,51 @@ class PriceItems extends StatefulWidget {
   @override
   _PriceItemsState createState() => _PriceItemsState();
 }
+
 class _PriceItemsState extends State<PriceItems> {
   bool selectprice = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return InkWell(
-      onTap: (){
-        setState(() {
-          selectprice = !selectprice;
-        });
-      },
-      child: Container(
-        height: 50,
-        width: 50,
-        decoration: BoxDecoration(
-          border: Border.all(width: 2,color: Color(0xff0ED2F7)),
-          color: selectprice==true?Colors.blue.withOpacity(0.7):Colors.white,
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        child: Center(
-          child: Text(widget.pricecake,
-            style: GoogleFonts.pacifico(
-                fontSize: 25, color: selectprice==true?Colors.white:Colors.black),
+    return Stack(
+      children: [
+        InkWell(
+          onTap: () {
+            setState(() {
+              selectprice = !selectprice;
+            });
+          },
+          child: Container(
+            height: size.height * 0.3,
+            width: size.width * 0.3,
+            decoration: BoxDecoration(
+              border: Border.all(width: 2, color: Color(0xff0ED2F7)),
+              color: selectprice == true
+                  ? Colors.blue.withOpacity(0.7)
+                  : Colors.white,
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Center(
+              child: Text(
+                widget.pricecake,
+                style: GoogleFonts.pacifico(
+                    fontSize: 25,
+                    color: selectprice == true ? Colors.white : Colors.black),
+              ),
+            ),
           ),
         ),
-      ),
+        Positioned(
+          top: 3,
+          right: 3,
+          child: selectprice == true
+              ? FaIcon(
+                  FontAwesomeIcons.checkCircle,
+                  color: Colors.white,
+                )
+              : FaIcon(FontAwesomeIcons.circle,color: Color(0xff0ED2F7),),
+        )
+      ],
     );
   }
 }
