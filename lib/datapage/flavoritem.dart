@@ -26,7 +26,7 @@ class _FlavorItemsState extends State<FlavorItems> {
             child: Container(
               width: 100,
               decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: Colors.white),
+                  //border: Border.all(width: 1, color: Colors.white),
                   //boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.8),blurRadius:3.0,offset: Offset(0.0,1.0),spreadRadius: 0.5)],
                   borderRadius: BorderRadius.circular(15.0),
                   gradient: LinearGradient(
@@ -36,7 +36,7 @@ class _FlavorItemsState extends State<FlavorItems> {
               child: Center(
                 child: Text(
                   widget.nameflavor,
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(color: Colors.white, fontSize: 17),
                 ),
               ),
             ),

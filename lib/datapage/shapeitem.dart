@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-class ColorItems extends StatefulWidget {
-  final String namecolor ;
+class ShapeItems extends StatefulWidget {
+  final String nameshape;
 
-  const ColorItems({Key key, this.namecolor}) : super(key: key);
+  const ShapeItems({Key key, this.nameshape}) : super(key: key);
   @override
-  _ColorItemsState createState() => _ColorItemsState();
+  _ShapeItemsState createState() => _ShapeItemsState();
 }
 
-class _ColorItemsState extends State<ColorItems> {
+class _ShapeItemsState extends State<ShapeItems> {
   bool oncheck = false;
   @override
   Widget build(BuildContext context) {
@@ -20,22 +20,17 @@ class _ColorItemsState extends State<ColorItems> {
           child: InkWell(
             onTap: (){
               setState(() {
-                oncheck = ! oncheck;
+                oncheck = !oncheck;
               });
             },
             child: Container(
               width: size.width * 0.3,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
-                  gradient: LinearGradient(
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xffff9068),
-                        Color(0xffff4b1f),
-                      ])),
+                gradient: LinearGradient(colors: [Color(0xff0ED2F7),Color(0xff2196f3)]),
+                borderRadius: BorderRadius.circular(15.0)
+              ),
               child: Center(
-                child: Text(widget.namecolor, style: TextStyle(color: Colors.white,fontSize: 17),),
+                child: Text(widget.nameshape,style: TextStyle(fontSize: 17,color: Colors.white),),
               ),
             ),
           ),

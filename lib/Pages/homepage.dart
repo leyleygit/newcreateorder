@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:new_createorder/datapage/coloritem.dart';
 import 'package:new_createorder/datapage/flavoritem.dart';
 import 'package:new_createorder/datapage/priceitem.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:new_createorder/datapage/shapeitem.dart';
 
 class MyHomepage extends StatefulWidget {
   @override
@@ -39,17 +41,41 @@ class _MyHomepageState extends State<MyHomepage> {
     "សូកូឡា",
   ];
   List<String> namecolor = [
-    "aaa",
-    "ដូងត្រាវ",
-    "ស្រ្តបឺរី",
-    "សង់ខ្យាដូងតយ",
-    "វ៉ាន់នីឡា",
-    "តែថៃ",
-    "ខ្នុរ",
-    "ផាសសិន",
-    "ធូរេន",
-    "ប្លូបឺរី",
-    "សូកូឡា",
+    "ផ្សេង",
+    "ដូរយកស",
+    "ដូរយកក្រហម",
+    "ដូរយកខ្មៅ",
+    "ដូរយកលឿង",
+    "ដូរយកផ្ទៃមេឃ",
+    "ដូរយកខៀវដិត",
+    "ដូរយកត្នោត",
+    "ដូរយកផ្កាឈូក",
+    "ដូយកទឹកក្រូច",
+    "ដូរយកអាវទាហាន",
+    "ដូរយកសាច់",
+    "ដូរយកស្វាយ",
+    "ដូរយកប្រផេះ",
+    "ដូរយកមាស",
+    "ដូរយកផ្កាឈូកដិត",
+    "ដូចរូប",
+  ];List<String> nameshape = [
+    "រាងលុយ",
+    "ខ្ពស់",
+    "*4 ស្រទាប់",
+    "*3 ស្រទាប់",
+    "រាងលេខ",
+    "រាងអក្សរ",
+    "នំបីជាន់",
+    "ជ្រុងស្មើរ",
+    "នំពីរជាន់",
+    "រាងកូនក្រមុំ",
+    "រាងជ្រូក",
+    "រាងបាល់",
+    "រាងក្រឡរ",
+    "រាងជ្រុងវែង",
+    "មូល",
+    "បេះដូង",
+    "ដូចរូប",
   ];
   @override
   Widget build(BuildContext context) {
@@ -147,7 +173,7 @@ class _MyHomepageState extends State<MyHomepage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "Select Flavor",
+                        "Flavor",
                         style: GoogleFonts.fredokaOne(
                             fontSize: 20, color: Colors.white),
                       ),
@@ -180,7 +206,7 @@ class _MyHomepageState extends State<MyHomepage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Select Color",
+                          "Color",
                           style: GoogleFonts.fredokaOne(
                               fontSize: 20, color: Colors.white),
                         ),
@@ -192,12 +218,40 @@ class _MyHomepageState extends State<MyHomepage> {
                               scrollDirection: Axis.horizontal,
                               itemCount: 10,
                               itemBuilder: (BuildContext context, int index) {
-                                return ColorItems();
+                                return ColorItems(namecolor: namecolor[index],);
                               }),
                         )
                       ],
                     ),
                   )),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                //BodySliverToBoxAdapter
+                height: size.height * 0.15,
+                //color: Colors.blue,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10, left: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Shape",
+                        style: GoogleFonts.fredokaOne(
+                            fontSize: 20, color: Colors.white),
+                      ),
+                      Container(
+                        //bodyListView
+                        height: size.height * 0.1,
+                        //color: Colors.white,
+                        child: ListView.builder(itemCount: 10,scrollDirection: Axis.horizontal,itemBuilder: (BuildContext context, int index){
+                          return ShapeItems(nameshape: nameshape[index],);
+                        }),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             )
           ],
         ),
