@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:new_createorder/datapage/coloritem.dart';
 import 'package:new_createorder/datapage/flavoritem.dart';
 import 'package:new_createorder/datapage/priceitem.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class MyHomepage extends StatefulWidget {
   @override
   _MyHomepageState createState() => _MyHomepageState();
@@ -25,6 +27,19 @@ class _MyHomepageState extends State<MyHomepage> {
   ];
   List<String> nameflavor = [
     "ត្រាវ",
+    "ដូងត្រាវ",
+    "ស្រ្តបឺរី",
+    "សង់ខ្យាដូងតយ",
+    "វ៉ាន់នីឡា",
+    "តែថៃ",
+    "ខ្នុរ",
+    "ផាសសិន",
+    "ធូរេន",
+    "ប្លូបឺរី",
+    "សូកូឡា",
+  ];
+  List<String> namecolor = [
+    "aaa",
     "ដូងត្រាវ",
     "ស្រ្តបឺរី",
     "សង់ខ្យាដូងតយ",
@@ -110,7 +125,9 @@ class _MyHomepageState extends State<MyHomepage> {
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: PriceItems(pricecake: pricecake[index],),
+                              child: PriceItems(
+                                pricecake: pricecake[index],
+                              ),
                             );
                           },
                         ),
@@ -125,7 +142,7 @@ class _MyHomepageState extends State<MyHomepage> {
                 height: size.height * 0.15,
                 //color: Colors.deepOrange,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10,right: 10),
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -138,14 +155,49 @@ class _MyHomepageState extends State<MyHomepage> {
                         //body listview
                         height: size.height * 0.1,
                         //color: Colors.white,
-                        child: ListView.builder(scrollDirection: Axis.horizontal,itemCount: 5,itemBuilder: (BuildContext context, int index) {
-                          return FlavorItems(nameflavor: nameflavor[index],);
-                        },),
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 5,
+                          itemBuilder: (BuildContext context, int index) {
+                            return FlavorItems(
+                              nameflavor: nameflavor[index],
+                            );
+                          },
+                        ),
                       )
                     ],
                   ),
                 ),
               ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                  height: size.height * 0.15,
+                  //color: Colors.yellow,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 10, left: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Select Color",
+                          style: GoogleFonts.fredokaOne(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                        Container(
+                          //body listview
+                          height: size.height * 0.1,
+                          //color: Colors.blueAccent,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 10,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ColorItems();
+                              }),
+                        )
+                      ],
+                    ),
+                  )),
             )
           ],
         ),
