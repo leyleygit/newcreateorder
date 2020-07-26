@@ -29,7 +29,7 @@ class _PriceItemsState extends State<PriceItems> {
         child: Center(
           child: Text(widget.pricecake,
             style: GoogleFonts.pacifico(
-                fontSize: 25, color: selectprice==true?Colors.white:Colors.white),
+                fontSize: 25, color: selectprice==true?Colors.white:Color(0xff091EAA)),
           ),
         ),
       ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:new_createorder/datapage/flavoritem.dart';
 import 'package:new_createorder/datapage/priceitem.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class MyHomepage extends StatefulWidget {
   @override
   _MyHomepageState createState() => _MyHomepageState();
@@ -21,6 +22,19 @@ class _MyHomepageState extends State<MyHomepage> {
     "50\$",
     "55\$",
     "60\$",
+  ];
+  List<String> nameflavor = [
+    "ត្រាវ",
+    "ដូងត្រាវ",
+    "ស្រ្តបឺរី",
+    "សង់ខ្យាដូងតយ",
+    "វ៉ាន់នីឡា",
+    "តែថៃ",
+    "ខ្នុរ",
+    "ផាសសិន",
+    "ធូរេន",
+    "ប្លូបឺរី",
+    "សូកូឡា",
   ];
   @override
   Widget build(BuildContext context) {
@@ -101,7 +115,33 @@ class _MyHomepageState extends State<MyHomepage> {
                           },
                         ),
                       ),
-
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                height: size.height * 0.15,
+                //color: Colors.deepOrange,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10,right: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Select Flavor",
+                        style: GoogleFonts.fredokaOne(
+                            fontSize: 20, color: Colors.white),
+                      ),
+                      Container(
+                        //body listview
+                        height: size.height * 0.1,
+                        //color: Colors.white,
+                        child: ListView.builder(scrollDirection: Axis.horizontal,itemCount: 5,itemBuilder: (BuildContext context, int index) {
+                          return FlavorItems(nameflavor: nameflavor[index],);
+                        },),
+                      )
                     ],
                   ),
                 ),
