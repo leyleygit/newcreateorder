@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:new_createorder/datapage/camera.dart';
 import 'package:new_createorder/datapage/coloritem.dart';
 import 'package:new_createorder/datapage/flavoritem.dart';
 import 'package:new_createorder/datapage/priceitem.dart';
@@ -85,8 +86,8 @@ class _MyHomepageState extends State<MyHomepage> {
     final orientation = MediaQuery.of(context).orientation;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-//      backgroundColor: Color(0xff131313),
-      backgroundColor: Colors.white,
+    backgroundColor: Color(0xff131313),
+      //backgroundColor: Colors.white,
       body: Container(
         width: size.width,
         height: size.height,
@@ -94,19 +95,20 @@ class _MyHomepageState extends State<MyHomepage> {
           primary: false,
           slivers: <Widget>[
             SliverAppBar(
-              //backgroundColor: Color(0xff131313),
-              backgroundColor: Colors.white,
+              pinned: true,
+              backgroundColor: Color(0xff131313),
+              //backgroundColor: Colors.white,
               leading: Icon(
                 Icons.exit_to_app,
                 size: 30,
-                color: Colors.black,
+                color: Colors.white,
               ),
               actions: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: Icon(
                     Icons.notifications,
-                    color: Colors.black,
+                    color: Colors.white,
                     size: 30,
                   ),
                 )
@@ -124,7 +126,17 @@ class _MyHomepageState extends State<MyHomepage> {
                       Text(
                         "Create Order",
                         style: GoogleFonts.pacifico(
-                            fontSize: 30, color: Colors.black),
+                            fontSize: 30, color: Colors.white),
+                      ),
+                      Container(
+                        //body ListView Camera
+                        height: size.height * 0.2,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2,color: Colors.white)
+                        ),
+                        child: ListView.builder(itemCount: 1,scrollDirection: Axis.horizontal,itemBuilder: (BuildContext context, int index ){
+                          return CameraData();
+                        }),
                       )
                     ],
                   ),
@@ -140,7 +152,7 @@ class _MyHomepageState extends State<MyHomepage> {
                     Text(
                       "តម្លៃនំ",
                       style: GoogleFonts.fredokaOne(
-                          fontSize: 20, color: Colors.black),
+                          fontSize: 20, color: Colors.white),
                     ),
                     SizedBox(height: 3),
                     Container(
@@ -148,7 +160,7 @@ class _MyHomepageState extends State<MyHomepage> {
                       height: size.height * 0.3,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(width: 2,color: Color(0xff0ED2F7))
+                        border: Border.all(width: 2,color: Colors.white70)
                       ),
                       // color: Colors.yellow,
                       child: GridView.builder(
@@ -174,8 +186,8 @@ class _MyHomepageState extends State<MyHomepage> {
             SliverToBoxAdapter(
               child: Container(
                 height: size.height * 0.15,
-                //color: Color(0xff131313),
-                color: Colors.white,
+                color: Color(0xff131313),
+                //color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   child: Column(
@@ -184,7 +196,7 @@ class _MyHomepageState extends State<MyHomepage> {
                       Text(
                         "រសជាតិ",
                         style: GoogleFonts.fredokaOne(
-                            fontSize: 20, color: Colors.black),
+                            fontSize: 20, color: Colors.white),
                       ),
                       Container(
                         //body listview
@@ -208,8 +220,8 @@ class _MyHomepageState extends State<MyHomepage> {
             SliverToBoxAdapter(
               child: Container(
                   height: size.height * 0.15,
-                  color: Colors.white,
-                  //color: Color(0xff131313),
+                  //color: Colors.white,
+                  color: Color(0xff131313),
                   child: Padding(
                     padding: EdgeInsets.only(right: 10, left: 10),
                     child: Column(
@@ -218,7 +230,7 @@ class _MyHomepageState extends State<MyHomepage> {
                         Text(
                           "ពណ៍",
                           style: GoogleFonts.fredokaOne(
-                              fontSize: 20, color: Colors.black),
+                              fontSize: 20, color: Colors.white),
                         ),
                         Container(
                           //body listview
@@ -241,8 +253,8 @@ class _MyHomepageState extends State<MyHomepage> {
               child: Container(
                 //BodySliverToBoxAdapter
                 height: size.height * 0.15,
-                //color: Color(0xff131313),
-                color: Colors.white,
+                color: Color(0xff131313),
+//                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10, left: 10),
                   child: Column(
@@ -251,7 +263,7 @@ class _MyHomepageState extends State<MyHomepage> {
                       Text(
                         "រូបរាង",
                         style: GoogleFonts.fredokaOne(
-                            fontSize: 20, color: Colors.black),
+                            fontSize: 20, color: Colors.white),
                       ),
                       Container(
                         //bodyListView
@@ -274,17 +286,27 @@ class _MyHomepageState extends State<MyHomepage> {
           ],
         ),
       ),
-      bottomNavigationBar: CurvedNavigationBar(
-        height: 45,
-        backgroundColor: Colors.white,
-        color: Color(0xff0ED2F7),
-        index: 1,
-        items: <Widget>[
-          Icon(MdiIcons.note, color: Colors.white,),
-          Icon(MdiIcons.home, color: Colors.white,),
-          Icon(MdiIcons.image, color: Colors.white,)
-        ],
-      ),
+//      bottomNavigationBar: CurvedNavigationBar(
+//        height: 45,
+//        backgroundColor: Colors.white,
+//        color: Color(0xff0ED2F7),
+//        index: 1,
+//        items: <Widget>[
+//          Icon(MdiIcons.note, color: Colors.white,),
+//          Icon(MdiIcons.home, color: Colors.white,),
+//          //Icon(MdiIcons.image, color: Colors.white,),
+//          Container(
+//            decoration: BoxDecoration(
+//                color: Colors.white,
+//              borderRadius: BorderRadius.circular(5.0)
+//
+//            ),
+//            height: 25,
+//            width: 50,
+//            child: Center(child: Text("Save", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
+//          )
+//        ],
+//      ),
     );
   }
 }

@@ -18,6 +18,8 @@ class _PriceItemsState extends State<PriceItems> {
     return Stack(
       children: [
         InkWell(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
           onTap: () {
             setState(() {
               selectprice = !selectprice;
@@ -27,10 +29,10 @@ class _PriceItemsState extends State<PriceItems> {
             height: size.height * 0.3,
             width: size.width * 0.3,
             decoration: BoxDecoration(
-              border: Border.all(width: 2, color: Color(0xff0ED2F7)),
+              border: Border.all(width: 2, color: Colors.white70),
               color: selectprice == true
                   ? Colors.blue.withOpacity(0.7)
-                  : Colors.white,
+                  : Colors.white70,
               borderRadius: BorderRadius.circular(20.0),
             ),
             child: Center(
@@ -51,7 +53,7 @@ class _PriceItemsState extends State<PriceItems> {
                   FontAwesomeIcons.checkCircle,
                   color: Colors.white,
                 )
-              : FaIcon(FontAwesomeIcons.circle,color: Color(0xff0ED2F7),),
+              : FaIcon(FontAwesomeIcons.circle,color: Colors.white70,),
         )
       ],
     );
