@@ -27,7 +27,7 @@ class _FlavorItemsState extends State<FlavorItems> {
               width: 100,
               decoration: BoxDecoration(
                   //border: Border.all(width: 1, color: Colors.white),
-                  //boxShadow: [BoxShadow(color: Colors.white.withOpacity(0.8),blurRadius:3.0,offset: Offset(0.0,1.0),spreadRadius: 0.5)],
+                  //boxShadow: [BoxShadow(color: Color(0xffff9068),blurRadius:5.0,offset: (Offset(0.0,5.0)),spreadRadius: 0.1)],
                   borderRadius: BorderRadius.circular(15.0),
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,

@@ -1,13 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:new_createorder/datapage/camera.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:new_createorder/datapage/coloritem.dart';
 import 'package:new_createorder/datapage/flavoritem.dart';
 import 'package:new_createorder/datapage/priceitem.dart';
 import 'package:new_createorder/datapage/shapeitem.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MyHomepage extends StatefulWidget {
@@ -16,6 +18,7 @@ class MyHomepage extends StatefulWidget {
 }
 
 class _MyHomepageState extends State<MyHomepage> {
+  int i = 0;
   List<String> pricecake = [
     "5\$",
     "10\$",
@@ -81,12 +84,27 @@ class _MyHomepageState extends State<MyHomepage> {
     "បេះដូង",
     "ដូចរូប",
   ];
+  List<File> _image;
+  final picker = ImagePicker();
+  Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    setState(() {
+      _image.add(File(pickedFile.path));
+    });
+  }
+
+  @override
+  void initState() {
+    _image = [];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final orientation = MediaQuery.of(context).orientation;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-    backgroundColor: Color(0xff131313),
+      backgroundColor: Color(0xff131313),
       //backgroundColor: Colors.white,
       body: Container(
         width: size.width,
@@ -105,13 +123,19 @@ class _MyHomepageState extends State<MyHomepage> {
               ),
               actions: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Icon(
-                    Icons.notifications,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                )
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Text(
+                      "${pricecake[i]}",
+                      style: GoogleFonts.pacifico(
+                          color: Colors.white,
+                          fontSize: 30,
+                          shadows: [
+                            BoxShadow(
+                                color: Colors.white,
+                                blurRadius: 20,
+                                spreadRadius: 5)
+                          ]),
+                    ))
               ],
             ),
             SliverToBoxAdapter(
@@ -132,11 +156,57 @@ class _MyHomepageState extends State<MyHomepage> {
                         //body ListView Camera
                         height: size.height * 0.2,
                         decoration: BoxDecoration(
-                          border: Border.all(width: 2,color: Colors.white)
-                        ),
-                        child: ListView.builder(itemCount: 1,scrollDirection: Axis.horizontal,itemBuilder: (BuildContext context, int index ){
-                          return CameraData();
-                        }),
+                            //border: Border.all(width: 2, color: Colors.white)
+                            ),
+                        child: ListView.builder(
+                            itemCount: _image.length + 1,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (BuildContext context, int index) {
+                              return index == 0
+                                  ? Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: InkWell(
+                                        onTap: getImage,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color:
+                                                  Colors.grey.withOpacity(0.3),
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0)),
+                                          width: 60,
+                                          child: Icon(
+                                            MdiIcons.camera,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 4.0),
+                                      child: GestureDetector(
+                                        onLongPress: () {
+                                          setState(() {
+                                            _image.removeAt(index - 1);
+                                          });
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                            width: size.width * 0.25,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: AssetImage(
+                                                      _image[index - 1].path),
+                                                )),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                            }),
                       )
                     ],
                   ),
@@ -154,30 +224,50 @@ class _MyHomepageState extends State<MyHomepage> {
                       style: GoogleFonts.fredokaOne(
                           fontSize: 20, color: Colors.white),
                     ),
-                    SizedBox(height: 3),
+                    Divider(
+                      height: 2,
+                      color: Colors.white,
+                      indent: 32,
+                      endIndent: 32,
+                    ),
                     Container(
                       width: size.width * 1.0,
                       height: size.height * 0.3,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(width: 2,color: Colors.white70)
                       ),
                       // color: Colors.yellow,
                       child: GridView.builder(
-                        gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4,
                         ),
-                        itemCount: 12,
+                        itemCount: pricecake.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: PriceItems(
-                              pricecake: pricecake[index],
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              borderRadius: BorderRadius.circular(10),
+                              onTap: () {
+                                setState(() {
+                                  i = index;
+                                });
+                              },
+                              child: PriceItems(
+                                index: i,
+                                selectprice: index == i ? true : false,
+                                pricecake: pricecake[index],
+                              ),
                             ),
                           );
                         },
                       ),
+                    ),
+                    Divider(
+                      height: 2,
+                      color: Colors.white,
+                      indent: 32,
+                      endIndent: 32,
                     ),
                   ],
                 ),
@@ -282,31 +372,67 @@ class _MyHomepageState extends State<MyHomepage> {
                   ),
                 ),
               ),
+            ),
+            SliverToBoxAdapter(
+              child: Container(
+                //Body Sliver ToboxAdapter
+                height: size.height * 0.1,
+                //color: Colors.blue,
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 15),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.white,
+                                  blurRadius: 5,
+                                  spreadRadius: 1)
+                            ],
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.white,
+                          ),
+                          width: size.width / 2,
+                          child: Center(
+                            child: Text(
+                              "Save",
+                              style: GoogleFonts.fredokaOne(
+                                  fontSize: 20, color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Icon(
+                        MdiIcons.noteText,
+                        color: Colors.white,
+                        size: 50,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 10),
+                      child: Icon(
+                        MdiIcons.image,
+                        color: Colors.white,
+                        size: 45,
+                      ),
+                    )
+                  ],
+                ),
+              ),
             )
           ],
         ),
       ),
-//      bottomNavigationBar: CurvedNavigationBar(
-//        height: 45,
-//        backgroundColor: Colors.white,
-//        color: Color(0xff0ED2F7),
-//        index: 1,
-//        items: <Widget>[
-//          Icon(MdiIcons.note, color: Colors.white,),
-//          Icon(MdiIcons.home, color: Colors.white,),
-//          //Icon(MdiIcons.image, color: Colors.white,),
-//          Container(
-//            decoration: BoxDecoration(
-//                color: Colors.white,
-//              borderRadius: BorderRadius.circular(5.0)
-//
-//            ),
-//            height: 25,
-//            width: 50,
-//            child: Center(child: Text("Save", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),)),
-//          )
-//        ],
-//      ),
     );
   }
 }
