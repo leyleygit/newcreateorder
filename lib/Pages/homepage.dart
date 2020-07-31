@@ -407,15 +407,19 @@ class _MyHomepageState extends State<MyHomepage> {
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: Container(),
-                    ),
+                    Spacer(),
                     Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Icon(
-                        MdiIcons.noteText,
-                        color: Colors.white,
-                        size: 50,
+                      padding: const EdgeInsets.only(left: 20, bottom: 20),
+                      child: IconButton(
+                        color: Colors.green,
+                        onPressed: () {
+                          _buttonpopuptextfield(context);
+                        },
+                        icon: Icon(
+                          MdiIcons.noteText,
+                          size: 50,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     Padding(
@@ -434,5 +438,153 @@ class _MyHomepageState extends State<MyHomepage> {
         ),
       ),
     );
+  }
+
+  void _buttonpopuptextfield(context) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.transparent,
+        builder: (BuildContext btp) {
+          return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                color: Colors.white,
+              ),
+              height: MediaQuery.of(context).size.height,
+              //padding: EdgeInsets.only(left: 10, right: 10),
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar(
+                    pinned: true,
+                    automaticallyImplyLeading: false,
+                    backgroundColor: Colors.white,
+                    title: Text(
+                      "បន្ថែមពត៍មានពីនំ",
+                      style: GoogleFonts.fredokaOne(
+                          fontSize: 20, color: Colors.black),
+                    ),
+                    actions: <Widget>[
+                      IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop("You has been saved");
+                          },
+                          icon: Icon(
+                            FontAwesomeIcons.checkCircle,
+                            size: 30,
+                            color: Color(0xff0ED2F7),
+                          )),
+                    ],
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10,right: 10),
+                      height: MediaQuery.of(context).size.height * 0.15,
+                      //color: Colors.purple.withOpacity(0.2),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xff0ED2F7))),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20.0)),
+                            hintText: "Description"),
+                        maxLines: 4,
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      //color: Colors.yellow,
+                      child: Row(
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                "Type of food",
+                                style: GoogleFonts.fredokaOne(
+                                    fontSize: 20, color: Colors.black),
+                              ),
+                            ],
+                          ),
+                          Spacer(),
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                "Coffee・Ice Cream,Thai",
+                                style: GoogleFonts.abel(
+                                    fontSize: 17, color: Colors.black),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+                      height: MediaQuery.of(context).size.height * 0.15,
+                      //color: Colors.yellow,
+                      child: Row(
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                "Address",
+                                style: GoogleFonts.fredokaOne(
+                                    fontSize: 20, color: Colors.black),
+                              ),
+                            ],
+                          ),
+                          Spacer(),
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                "#184,St 155 \nSangkat Toul Tompong \n Khan Chomkamorn \n Phnom Penh",
+                                style: GoogleFonts.abel(
+                                    fontSize: 17, color: Colors.black),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      //color: Colors.yellow,
+                      child: Row(
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                "Contact",
+                                style: GoogleFonts.fredokaOne(
+                                    fontSize: 20, color: Colors.black),
+                              ),
+                            ],
+                          ),
+                          Spacer(),
+                          Column(
+                            children: <Widget>[
+                              Text(
+                                "081 828 288 \n 015 704 034",
+                                style: GoogleFonts.abel(
+                                    fontSize: 17, color: Colors.black),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SliverFillRemaining(
+                    child: Container(),
+                  )
+                ],
+              ));
+        });
   }
 }
