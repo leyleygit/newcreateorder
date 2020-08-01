@@ -481,7 +481,7 @@ class _MyHomepageState extends State<MyHomepage> {
                           icon: Icon(
                             FontAwesomeIcons.checkCircle,
                             size: 30,
-                            color: Color(0xff0ED2F7,),
+                            color: Color(0xffff4b1f),
                           )),
                     ],
                   ),
@@ -512,7 +512,7 @@ class _MyHomepageState extends State<MyHomepage> {
                               Text(
                                 "Type of food",
                                 style: GoogleFonts.raleway(
-                                    fontSize: 15, color: Colors.black),
+                                    fontSize: 15, color: Color(0xffff4b1f)),
                               ),
                             ],
                           ),
@@ -542,7 +542,7 @@ class _MyHomepageState extends State<MyHomepage> {
                               Text(
                                 "Address",
                                 style: GoogleFonts.raleway(
-                                    fontSize: 15, color: Colors.black),
+                                    fontSize: 15, color: Color(0xffff4b1f)),
                               ),
                             ],
                           ),
@@ -563,8 +563,8 @@ class _MyHomepageState extends State<MyHomepage> {
                   SliverToBoxAdapter(
                     child: Container(
                       //color: Colors.yellow,
-                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
-                      height: MediaQuery.of(context).size.height * 0.1,
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      height: MediaQuery.of(context).size.height * 0.05,
                       //color: Colors.yellow,
                       child: Row(
                         children: <Widget>[
@@ -574,7 +574,7 @@ class _MyHomepageState extends State<MyHomepage> {
                               Text(
                                 "Contact",
                                 style: GoogleFonts.raleway(
-                                    fontSize: 15, color: Colors.black),
+                                    fontSize: 15, color: Color(0xffff4b1f)),
                               ),
                             ],
                           ),
