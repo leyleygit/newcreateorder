@@ -98,6 +98,12 @@ class _MyHomepageState extends State<MyHomepage> {
     _image = [];
     super.initState();
   }
+  Future importfromgallary() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      _image.add(File(pickedFile.path));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -409,25 +415,29 @@ class _MyHomepageState extends State<MyHomepage> {
                     ),
                     Spacer(),
                     Padding(
-                      padding: const EdgeInsets.only(left: 20, bottom: 20),
-                      child: IconButton(
-                        color: Colors.green,
-                        onPressed: () {
+                      padding: const EdgeInsets.only(left: 20,),
+                      child: InkWell(
+                        child: Icon(
+                          MdiIcons.noteText,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                        onTap: (){
                           _buttonpopuptextfield(context);
                         },
-                        icon: Icon(
-                          MdiIcons.noteText,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                      ),
+                      )
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20, right: 10),
-                      child: Icon(
-                        MdiIcons.image,
-                        color: Colors.white,
-                        size: 45,
+                      child: InkWell(
+                        onTap: (){
+                          importfromgallary();
+                        },
+                        child: Icon(
+                          MdiIcons.image,
+                          color: Colors.white,
+                          size: 40,
+                        ),
                       ),
                     )
                   ],
@@ -447,7 +457,7 @@ class _MyHomepageState extends State<MyHomepage> {
         builder: (BuildContext btp) {
           return Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
+                borderRadius: BorderRadius.circular(20.0),
                 color: Colors.white,
               ),
               height: MediaQuery.of(context).size.height,
@@ -457,7 +467,7 @@ class _MyHomepageState extends State<MyHomepage> {
                   SliverAppBar(
                     pinned: true,
                     automaticallyImplyLeading: false,
-                    backgroundColor: Colors.white,
+                    backgroundColor: Colors.transparent,
                     title: Text(
                       "បន្ថែមពត៍មានពីនំ",
                       style: GoogleFonts.fredokaOne(
@@ -466,12 +476,12 @@ class _MyHomepageState extends State<MyHomepage> {
                     actions: <Widget>[
                       IconButton(
                           onPressed: () {
-                            Navigator.of(context).pop("You has been saved");
+                            Navigator.of(context).pop();
                           },
                           icon: Icon(
                             FontAwesomeIcons.checkCircle,
                             size: 30,
-                            color: Color(0xff0ED2F7),
+                            color: Color(0xff0ED2F7,),
                           )),
                     ],
                   ),
@@ -501,8 +511,8 @@ class _MyHomepageState extends State<MyHomepage> {
                             children: <Widget>[
                               Text(
                                 "Type of food",
-                                style: GoogleFonts.fredokaOne(
-                                    fontSize: 20, color: Colors.black),
+                                style: GoogleFonts.raleway(
+                                    fontSize: 15, color: Colors.black),
                               ),
                             ],
                           ),
@@ -512,7 +522,7 @@ class _MyHomepageState extends State<MyHomepage> {
                               Text(
                                 "Coffee・Ice Cream,Thai",
                                 style: GoogleFonts.abel(
-                                    fontSize: 17, color: Colors.black),
+                                    fontSize: 15, color: Colors.black),
                               ),
                             ],
                           )
@@ -531,8 +541,8 @@ class _MyHomepageState extends State<MyHomepage> {
                             children: <Widget>[
                               Text(
                                 "Address",
-                                style: GoogleFonts.fredokaOne(
-                                    fontSize: 20, color: Colors.black),
+                                style: GoogleFonts.raleway(
+                                    fontSize: 15, color: Colors.black),
                               ),
                             ],
                           ),
@@ -542,7 +552,7 @@ class _MyHomepageState extends State<MyHomepage> {
                               Text(
                                 "#184,St 155 \nSangkat Toul Tompong \n Khan Chomkamorn \n Phnom Penh",
                                 style: GoogleFonts.abel(
-                                    fontSize: 17, color: Colors.black),
+                                    fontSize: 15, color: Colors.black),
                               ),
                             ],
                           )
@@ -552,6 +562,7 @@ class _MyHomepageState extends State<MyHomepage> {
                   ),
                   SliverToBoxAdapter(
                     child: Container(
+                      //color: Colors.yellow,
                       padding: EdgeInsets.only(left: 10, top: 10, right: 10),
                       height: MediaQuery.of(context).size.height * 0.1,
                       //color: Colors.yellow,
@@ -559,10 +570,11 @@ class _MyHomepageState extends State<MyHomepage> {
                         children: <Widget>[
                           Column(
                             children: <Widget>[
+
                               Text(
                                 "Contact",
-                                style: GoogleFonts.fredokaOne(
-                                    fontSize: 20, color: Colors.black),
+                                style: GoogleFonts.raleway(
+                                    fontSize: 15, color: Colors.black),
                               ),
                             ],
                           ),
@@ -570,9 +582,9 @@ class _MyHomepageState extends State<MyHomepage> {
                           Column(
                             children: <Widget>[
                               Text(
-                                "081 828 288 \n 015 704 034",
+                                "081 828 288 / 015 704 034",
                                 style: GoogleFonts.abel(
-                                    fontSize: 17, color: Colors.black),
+                                    fontSize: 15, color: Colors.black),
                               ),
                             ],
                           )
@@ -580,9 +592,9 @@ class _MyHomepageState extends State<MyHomepage> {
                       ),
                     ),
                   ),
-                  SliverFillRemaining(
-                    child: Container(),
-                  )
+//                  SliverFillRemaining(
+//                    child: Container(),
+//                  )
                 ],
               ));
         });
