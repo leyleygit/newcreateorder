@@ -471,7 +471,7 @@ class _MyHomepageState extends State<MyHomepage> {
                     title: Text(
                       "បន្ថែមពត៍មានពីនំ",
                       style: GoogleFonts.fredokaOne(
-                          fontSize: 20, color: Colors.black),
+                          fontSize: 20, color: Colors.black54),
                     ),
                     actions: <Widget>[
                       IconButton(
@@ -492,7 +492,7 @@ class _MyHomepageState extends State<MyHomepage> {
                       //color: Colors.purple.withOpacity(0.2),
                       child: TextField(
                         decoration: InputDecoration(
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xff0ED2F7))),
+                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffff4b1f))),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20.0)),
                             hintText: "Description"),
