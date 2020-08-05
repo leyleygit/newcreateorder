@@ -18,18 +18,16 @@ class _PriceItemsState extends State<PriceItems> {
   bool selectprice = false;
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Stack(
       children: [
         Container(
-          height: size.height * 0.3,
-          width: size.width * 0.3,
+          //width: size.width * 0.2,
           decoration: BoxDecoration(
             //border: Border.all(width: 2, color: Colors.white70),
             color: widget.selectprice == true
                 ? Colors.blue.withOpacity(0.7)
                 : Colors.white24,
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(15.0),
           ),
           child: Center(
             child: Text(
@@ -41,16 +39,18 @@ class _PriceItemsState extends State<PriceItems> {
           ),
         ),
         Positioned(
-            top: 3,
+            top: 1,
             right: 3,
             child: widget.selectprice == true
                 ? FaIcon(
                     FontAwesomeIcons.checkCircle,
                     color: Colors.white,
+                    size: 18,
                   )
                 : FaIcon(
                     FontAwesomeIcons.circle,
                     color: Colors.white,
+                    size: 18,
                   ))
       ],
     );

@@ -2,14 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:new_createorder/datapage/coloritem.dart';
-import 'package:new_createorder/datapage/flavoritem.dart';
 import 'package:new_createorder/datapage/priceitem.dart';
-import 'package:new_createorder/datapage/shapeitem.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MyHomepage extends StatefulWidget {
@@ -17,7 +13,7 @@ class MyHomepage extends StatefulWidget {
   _MyHomepageState createState() => _MyHomepageState();
 }
 
-class _MyHomepageState extends State<MyHomepage> {
+class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
   int i = 0;
   List<String> pricecake = [
     "5\$",
@@ -98,6 +94,7 @@ class _MyHomepageState extends State<MyHomepage> {
     _image = [];
     super.initState();
   }
+
   Future importfromgallary() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     setState(() {
@@ -107,7 +104,6 @@ class _MyHomepageState extends State<MyHomepage> {
 
   @override
   Widget build(BuildContext context) {
-    final orientation = MediaQuery.of(context).orientation;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Color(0xff131313),
@@ -175,10 +171,11 @@ class _MyHomepageState extends State<MyHomepage> {
                                         onTap: getImage,
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              color:
-                                                  Colors.grey.withOpacity(0.3),
+                                              color: Colors.grey
+                                                  .withOpacity(0.3),
                                               borderRadius:
-                                                  BorderRadius.circular(5.0)),
+                                                  BorderRadius.circular(
+                                                      5.0)),
                                           width: 60,
                                           child: Icon(
                                             MdiIcons.camera,
@@ -188,8 +185,8 @@ class _MyHomepageState extends State<MyHomepage> {
                                       ),
                                     )
                                   : Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 4.0),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 4.0),
                                       child: GestureDetector(
                                         onLongPress: () {
                                           setState(() {
@@ -197,16 +194,19 @@ class _MyHomepageState extends State<MyHomepage> {
                                           });
                                         },
                                         child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                          padding:
+                                              const EdgeInsets.all(8.0),
                                           child: Container(
                                             width: size.width * 0.25,
                                             decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(10.0),
+                                                    BorderRadius.circular(
+                                                        10.0),
                                                 image: DecorationImage(
                                                   fit: BoxFit.cover,
                                                   image: AssetImage(
-                                                      _image[index - 1].path),
+                                                      _image[index - 1]
+                                                          .path),
                                                 )),
                                           ),
                                         ),
@@ -231,22 +231,24 @@ class _MyHomepageState extends State<MyHomepage> {
                           fontSize: 20, color: Colors.white),
                     ),
                     Divider(
-                      height: 2,
-                      color: Colors.white,
-                      indent: 32,
-                      endIndent: 32,
+                      height: 1,
+                      color: Colors.grey,
+                      indent: 20,
+                      endIndent: 20,
                     ),
                     Container(
-                      width: size.width * 1.0,
-                      height: size.height * 0.3,
+                      //width: size.width * 1.0,
+                      height: size.height * 0.2,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       // color: Colors.yellow,
                       child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4,
+                        gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
                         ),
+                        scrollDirection: Axis.horizontal,
                         itemCount: pricecake.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
@@ -270,115 +272,116 @@ class _MyHomepageState extends State<MyHomepage> {
                       ),
                     ),
                     Divider(
-                      height: 2,
-                      color: Colors.white,
-                      indent: 32,
-                      endIndent: 32,
+                      height: 1,
+                      color: Colors.grey,
+                      indent: 20,
+                      endIndent: 20,
                     ),
                   ],
                 ),
               ),
             ),
-            SliverToBoxAdapter(
-              child: Container(
-                height: size.height * 0.17,
-                color: Color(0xff131313),
-                //color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "រសជាតិ",
-                        style: GoogleFonts.fredokaOne(
-                            fontSize: 20, color: Colors.white),
-                      ),
-                      Container(
-                        //body listview
-                        height: size.height * 0.1,
-                        //color: Colors.white,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 5,
-                          itemBuilder: (BuildContext context, int index) {
-                            return FlavorItems(
-                              nameflavor: nameflavor[index],
-                            );
-                          },
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Container(
-                  height: size.height * 0.17,
-                  //color: Colors.white,
-                  color: Color(0xff131313),
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 10, left: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "ពណ៍",
-                          style: GoogleFonts.fredokaOne(
-                              fontSize: 20, color: Colors.white),
-                        ),
-                        Container(
-                          //body listview
-                          height: size.height * 0.1,
-                          //color: Colors.blueAccent,
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 10,
-                              itemBuilder: (BuildContext context, int index) {
-                                return ColorItems(
-                                  namecolor: namecolor[index],
-                                );
-                              }),
-                        )
-                      ],
-                    ),
-                  )),
-            ),
-            SliverToBoxAdapter(
-              child: Container(
-                //BodySliverToBoxAdapter
-                height: size.height * 0.17,
-                color: Color(0xff131313),
-//                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10, left: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "រូបរាង",
-                        style: GoogleFonts.fredokaOne(
-                            fontSize: 20, color: Colors.white),
-                      ),
-                      Container(
-                        //bodyListView
-                        height: size.height * 0.1,
-                        //color: Colors.white,
-                        child: ListView.builder(
-                            itemCount: 10,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, int index) {
-                              return ShapeItems(
-                                nameshape: nameshape[index],
-                              );
-                            }),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
+//            SliverToBoxAdapter(
+//              child: Container(
+//                height: size.height * 0.17,
+//                color: Color(0xff131313),
+//                //color: Colors.white,
+//                child: Padding(
+//                  padding: const EdgeInsets.only(left: 10, right: 10),
+//                  child: Column(
+//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    children: <Widget>[
+//                      Text(
+//                        "រសជាតិ",
+//                        style: GoogleFonts.fredokaOne(
+//                            fontSize: 20, color: Colors.white),
+//                      ),
+//                      Container(
+//                        //body listview
+//                        height: size.height * 0.1,
+//                        //color: Colors.white,
+//                        child: ListView.builder(
+//                          scrollDirection: Axis.horizontal,
+//                          itemCount: 5,
+//                          itemBuilder: (BuildContext context, int index) {
+//                            return FlavorItems(
+//                              nameflavor: nameflavor[index],
+//                            );
+//                          },
+//                        ),
+//                      )
+//                    ],
+//                  ),
+//                ),
+//              ),
+//            ),
+//            SliverToBoxAdapter(
+//              child: Container(
+//                  height: size.height * 0.17,
+//                  //color: Colors.white,
+//                  color: Color(0xff131313),
+//                  child: Padding(
+//                    padding: EdgeInsets.only(right: 10, left: 10),
+//                    child: Column(
+//                      crossAxisAlignment: CrossAxisAlignment.start,
+//                      children: <Widget>[
+//                        Text(
+//                          "ពណ៍",
+//                          style: GoogleFonts.fredokaOne(
+//                              fontSize: 20, color: Colors.white),
+//                        ),
+//                        Container(
+//                          //body listview
+//                          height: size.height * 0.1,
+//                          //color: Colors.blueAccent,
+//                          child: ListView.builder(
+//                              scrollDirection: Axis.horizontal,
+//                              itemCount: 10,
+//                              itemBuilder: (BuildContext context, int index) {
+//                                return ColorItems(
+//                                  namecolor: namecolor[index],
+//                                );
+//                              }),
+//                        )
+//                      ],
+//                    ),
+//                  )),
+//            ),
+//            SliverToBoxAdapter(
+//              child: Container(
+//                //BodySliverToBoxAdapter
+//                height: size.height * 0.17,
+//                color: Color(0xff131313),
+////                color: Colors.white,
+//                child: Padding(
+//                  padding: const EdgeInsets.only(right: 10, left: 10),
+//                  child: Column(
+//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    children: [
+//                      Text(
+//                        "រូបរាង",
+//                        style: GoogleFonts.fredokaOne(
+//                            fontSize: 20, color: Colors.white),
+//                      ),
+//                      Container(
+//                        //bodyListView
+//                        height: size.height * 0.1,
+//                        //color: Colors.white,
+//                        child: ListView.builder(
+//                            itemCount: 10,
+//                            scrollDirection: Axis.horizontal,
+//                            itemBuilder: (BuildContext context, int index) {
+//                              return ShapeItems(
+//                                nameshape: nameshape[index],
+//                              );
+//                            }),
+//                      )
+//                    ],
+//                  ),
+//                ),
+//              ),
+//            ),
+            SliverToBoxAdapter(),
             SliverToBoxAdapter(
               child: Container(
                 //Body Sliver ToboxAdapter
@@ -415,22 +418,23 @@ class _MyHomepageState extends State<MyHomepage> {
                     ),
                     Spacer(),
                     Padding(
-                      padding: const EdgeInsets.only(left: 20,),
-                      child: InkWell(
-                        child: Icon(
-                          MdiIcons.noteText,
-                          color: Colors.white,
-                          size: 40,
+                        padding: const EdgeInsets.only(
+                          left: 20,
                         ),
-                        onTap: (){
-                          _buttonpopuptextfield(context);
-                        },
-                      )
-                    ),
+                        child: InkWell(
+                          child: Icon(
+                            MdiIcons.noteText,
+                            color: Colors.white,
+                            size: 40,
+                          ),
+                          onTap: () {
+                            _buttonpopuptextfield(context);
+                          },
+                        )),
                     Padding(
                       padding: const EdgeInsets.only(left: 20, right: 10),
                       child: InkWell(
-                        onTap: (){
+                        onTap: () {
                           importfromgallary();
                         },
                         child: Icon(
@@ -487,12 +491,14 @@ class _MyHomepageState extends State<MyHomepage> {
                   ),
                   SliverToBoxAdapter(
                     child: Container(
-                      padding: EdgeInsets.only(left: 10,right: 10),
+                      padding: EdgeInsets.only(left: 10, right: 10),
                       height: MediaQuery.of(context).size.height * 0.15,
                       //color: Colors.purple.withOpacity(0.2),
                       child: TextField(
                         decoration: InputDecoration(
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xffff4b1f))),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xffff4b1f))),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20.0)),
                             hintText: "Description"),
@@ -570,7 +576,6 @@ class _MyHomepageState extends State<MyHomepage> {
                         children: <Widget>[
                           Column(
                             children: <Widget>[
-
                               Text(
                                 "Contact",
                                 style: GoogleFonts.raleway(
