@@ -281,7 +281,7 @@ class _MyHomepageState extends State<MyHomepage> {
             ),
             SliverToBoxAdapter(
               child: Container(
-                height: size.height * 0.15,
+                height: size.height * 0.17,
                 color: Color(0xff131313),
                 //color: Colors.white,
                 child: Padding(
@@ -315,7 +315,7 @@ class _MyHomepageState extends State<MyHomepage> {
             ),
             SliverToBoxAdapter(
               child: Container(
-                  height: size.height * 0.15,
+                  height: size.height * 0.17,
                   //color: Colors.white,
                   color: Color(0xff131313),
                   child: Padding(
@@ -348,7 +348,7 @@ class _MyHomepageState extends State<MyHomepage> {
             SliverToBoxAdapter(
               child: Container(
                 //BodySliverToBoxAdapter
-                height: size.height * 0.15,
+                height: size.height * 0.17,
                 color: Color(0xff131313),
 //                color: Colors.white,
                 child: Padding(
