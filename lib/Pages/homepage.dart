@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:new_createorder/datapage/coloritem.dart';
+import 'package:new_createorder/datapage/flavoritem.dart';
 import 'package:new_createorder/datapage/priceitem.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:new_createorder/datapage/shapeitem.dart';
 
 class MyHomepage extends StatefulWidget {
   @override
@@ -140,83 +143,88 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                     ))
               ],
             ),
-            SliverToBoxAdapter(
-              child: Container(
-                height: size.height * 0.3,
-                //color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "Create Order",
-                        style: GoogleFonts.pacifico(
-                            fontSize: 30, color: Colors.white),
-                      ),
-                      Container(
-                        //body ListView Camera
-                        height: size.height * 0.2,
-                        decoration: BoxDecoration(
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: buildHeaderDelegate(
+                maxHeight: size.height * 0.3,
+                minHeight: size.height * 0.3,
+                child: Container(
+                  height: size.height * 0.3,
+                  color: Color(0xff131313),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Create Order",
+                          style: GoogleFonts.pacifico(
+                              fontSize: 30, color: Colors.white),
+                        ),
+                        Container(
+                          //body ListView Camera
+                          height: size.height * 0.2,
+                          decoration: BoxDecoration(
                             //border: Border.all(width: 2, color: Colors.white)
-                            ),
-                        child: ListView.builder(
-                            itemCount: _image.length + 1,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, int index) {
-                              return index == 0
-                                  ? Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: InkWell(
-                                        onTap: getImage,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey
-                                                  .withOpacity(0.3),
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      5.0)),
-                                          width: 60,
-                                          child: Icon(
-                                            MdiIcons.camera,
-                                            color: Colors.white,
-                                          ),
-                                        ),
+                          ),
+                          child: ListView.builder(
+                              itemCount: _image.length + 1,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) {
+                                return index == 0
+                                    ? Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                    onTap: getImage,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey
+                                              .withOpacity(0.3),
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              5.0)),
+                                      width: 60,
+                                      child: Icon(
+                                        MdiIcons.camera,
+                                        color: Colors.white,
                                       ),
-                                    )
-                                  : Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4.0),
-                                      child: GestureDetector(
-                                        onLongPress: () {
-                                          setState(() {
-                                            _image.removeAt(index - 1);
-                                          });
-                                        },
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            width: size.width * 0.25,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.0),
-                                                image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: AssetImage(
-                                                      _image[index - 1]
-                                                          .path),
-                                                )),
-                                          ),
-                                        ),
+                                    ),
+                                  ),
+                                )
+                                    : Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 4.0),
+                                  child: GestureDetector(
+                                    onLongPress: () {
+                                      setState(() {
+                                        _image.removeAt(index - 1);
+                                      });
+                                    },
+                                    child: Padding(
+                                      padding:
+                                      const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        width: size.width * 0.25,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                            BorderRadius.circular(
+                                                10.0),
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: AssetImage(
+                                                  _image[index - 1]
+                                                      .path),
+                                            )),
                                       ),
-                                    );
-                            }),
-                      )
-                    ],
+                                    ),
+                                  ),
+                                );
+                              }),
+                        )
+                      ],
+                    ),
                   ),
-                ),
+                )
               ),
             ),
             SliverToBoxAdapter(
@@ -447,161 +455,189 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
-
   void _buttonpopuptextfield(context) {
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
         builder: (BuildContext btp) {
-          return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                color: Colors.white,
-              ),
-              height: MediaQuery.of(context).size.height,
-              //padding: EdgeInsets.only(left: 10, right: 10),
-              child: CustomScrollView(
-                slivers: <Widget>[
-                  SliverAppBar(
-                    pinned: true,
-                    automaticallyImplyLeading: false,
-                    backgroundColor: Colors.transparent,
-                    title: Text(
-                      "បន្ថែមពត៍មានពីនំ",
-                      style: GoogleFonts.fredokaOne(
-                          fontSize: 20, color: Colors.black54),
-                    ),
-                    actions: <Widget>[
-                      IconButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          icon: Icon(
-                            FontAwesomeIcons.checkCircle,
-                            size: 30,
-                            color: Color(0xffff4b1f),
-                          )),
-                    ],
+          return ListView(
+            children: [
+                  Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: Colors.white,
                   ),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      padding: EdgeInsets.only(left: 10, right: 10),
-                      height: MediaQuery.of(context).size.height * 0.15,
-                      //color: Colors.purple.withOpacity(0.2),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xffff4b1f))),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0)),
-                            hintText: "Description"),
-                        maxLines: 4,
-                      ),
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      //color: Colors.yellow,
-                      child: Row(
-                        children: <Widget>[
-                          Column(
-                            children: <Widget>[
-                              Text(
-                                "Type of food",
-                                style: GoogleFonts.raleway(
-                                    fontSize: 15, color: Color(0xffff4b1f)),
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                          Column(
-                            children: <Widget>[
-                              Text(
-                                "Coffee・Ice Cream,Thai",
-                                style: GoogleFonts.abel(
-                                    fontSize: 15, color: Colors.black),
-                              ),
-                            ],
-                          )
+                  height: MediaQuery.of(context).size.height,
+                  //padding: EdgeInsets.only(left: 10, right: 10),
+                  child: CustomScrollView(
+                    slivers: <Widget>[
+                      SliverAppBar(
+                        pinned: true,
+                        automaticallyImplyLeading: false,
+                        backgroundColor: Colors.transparent,
+                        title: Text(
+                          "បន្ថែមពត៍មានពីនំ",
+                          style: GoogleFonts.fredokaOne(
+                              fontSize: 20, color: Colors.black54),
+                        ),
+                        actions: <Widget>[
+                          IconButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              icon: Icon(
+                                FontAwesomeIcons.checkCircle,
+                                size: 30,
+                                color: Color(0xffff4b1f),
+                              )),
                         ],
                       ),
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      padding: EdgeInsets.only(left: 10, top: 10, right: 10),
-                      height: MediaQuery.of(context).size.height * 0.15,
-                      //color: Colors.yellow,
-                      child: Row(
-                        children: <Widget>[
-                          Column(
+                      SliverToBoxAdapter(
+                        child: Container(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          //color: Colors.purple.withOpacity(0.2),
+                          child: TextField(
+                            decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Color(0xffff4b1f))),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20.0)),
+                                hintText: "Description"),
+                            maxLines: 4,
+                          ),
+                        ),
+                      ),
+                      SliverToBoxAdapter(
+                        child: Container(
+                          padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          //color: Colors.yellow,
+                          child: Row(
                             children: <Widget>[
-                              Text(
-                                "Address",
-                                style: GoogleFonts.raleway(
-                                    fontSize: 15, color: Color(0xffff4b1f)),
+                              Column(
+                                children: <Widget>[
+                                  Text(
+                                    "Type of food",
+                                    style: GoogleFonts.raleway(
+                                        fontSize: 15, color: Color(0xffff4b1f)),
+                                  ),
+                                ],
                               ),
+                              Spacer(),
+                              Column(
+                                children: <Widget>[
+                                  Text(
+                                    "Coffee・Ice Cream,Thai",
+                                    style: GoogleFonts.abel(
+                                        fontSize: 15, color: Colors.black),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
-                          Spacer(),
-                          Column(
-                            children: <Widget>[
-                              Text(
-                                "#184,St 155 \nSangkat Toul Tompong \n Khan Chomkamorn \n Phnom Penh",
-                                style: GoogleFonts.abel(
-                                    fontSize: 15, color: Colors.black),
-                              ),
-                            ],
-                          )
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      //color: Colors.yellow,
-                      padding: EdgeInsets.only(left: 10, right: 10),
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      //color: Colors.yellow,
-                      child: Row(
-                        children: <Widget>[
-                          Column(
+                      SliverToBoxAdapter(
+                        child: Container(
+                          padding: EdgeInsets.only(left: 10, top: 10, right: 10),
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          //color: Colors.yellow,
+                          child: Row(
                             children: <Widget>[
-                              Text(
-                                "Contact",
-                                style: GoogleFonts.raleway(
-                                    fontSize: 15, color: Color(0xffff4b1f)),
+                              Column(
+                                children: <Widget>[
+                                  Text(
+                                    "Address",
+                                    style: GoogleFonts.raleway(
+                                        fontSize: 15, color: Color(0xffff4b1f)),
+                                  ),
+                                ],
                               ),
+                              Spacer(),
+                              Column(
+                                children: <Widget>[
+                                  Text(
+                                    "#184,St 155 \nSangkat Toul Tompong \n Khan Chomkamorn \n Phnom Penh",
+                                    style: GoogleFonts.abel(
+                                        fontSize: 15, color: Colors.black),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
-                          Spacer(),
-                          Column(
-                            children: <Widget>[
-                              Text(
-                                "081 828 288 / 015 704 034",
-                                style: GoogleFonts.abel(
-                                    fontSize: 15, color: Colors.black),
-                              ),
-                            ],
-                          )
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
+                      SliverToBoxAdapter(
+                        child: Container(
+                          //color: Colors.yellow,
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          //color: Colors.yellow,
+                          child: Row(
+                            children: <Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Text(
+                                    "Contact",
+                                    style: GoogleFonts.raleway(
+                                        fontSize: 15, color: Color(0xffff4b1f)),
+                                  ),
+                                ],
+                              ),
+                              Spacer(),
+                              Column(
+                                children: <Widget>[
+                                  Text(
+                                    "081 828 288 / 015 704 034",
+                                    style: GoogleFonts.abel(
+                                        fontSize: 15, color: Colors.black),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
 //                  SliverFillRemaining(
 //                    child: Container(),
 //                  )
+                    ],
+                  )),
                 ],
-              ));
+          );
         });
+  }
+}
+class buildHeaderDelegate extends SliverPersistentHeaderDelegate{
+  final Widget child;
+  final double minHeight;
+  final double maxHeight;
+
+  buildHeaderDelegate({this.child, this.minHeight, this.maxHeight});
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+
+    return child;
+  }
+
+  @override
+
+  double get maxExtent => maxHeight;
+
+  @override
+  double get minExtent => minHeight;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return true;
   }
 }
