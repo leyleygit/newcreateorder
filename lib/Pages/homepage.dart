@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -146,10 +147,10 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
             SliverPersistentHeader(
               pinned: true,
               delegate: buildHeaderDelegate(
-                maxHeight: size.height * 0.3,
-                minHeight: size.height * 0.3,
+                maxHeight: size.height * 0.28,
+                minHeight: size.height * 0.28,
                 child: Container(
-                  height: size.height * 0.3,
+                  height: size.height * 0.28,
                   color: Color(0xff131313),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15),
@@ -238,12 +239,12 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                       style: GoogleFonts.fredokaOne(
                           fontSize: 20, color: Colors.white),
                     ),
-                    Divider(
-                      height: 1,
-                      color: Colors.grey,
-                      indent: 20,
-                      endIndent: 20,
-                    ),
+//                    Divider(
+//                      height: 1,
+//                      color: Colors.grey,
+//                      indent: 20,
+//                      endIndent: 20,
+//                    ),
                     Container(
                       //width: size.width * 1.0,
                       height: size.height * 0.2,
@@ -279,12 +280,12 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                         },
                       ),
                     ),
-                    Divider(
-                      height: 1,
-                      color: Colors.grey,
-                      indent: 20,
-                      endIndent: 20,
-                    ),
+//                    Divider(
+//                      height: 1,
+//                      color: Colors.grey,
+//                      indent: 20,
+//                      endIndent: 20,
+//                    ),
                   ],
                 ),
               ),
@@ -389,73 +390,146 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
 //                ),
 //              ),
 //            ),
-            SliverToBoxAdapter(),
-            SliverToBoxAdapter(
-              child: Container(
-                //Body Sliver ToboxAdapter
-                height: size.height * 0.1,
-                //color: Colors.blue,
-                child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 15),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.white,
-                                  blurRadius: 5,
-                                  spreadRadius: 1)
-                            ],
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.white,
-                          ),
-                          width: size.width / 2,
-                          child: Center(
-                            child: Text(
-                              "Save",
-                              style: GoogleFonts.fredokaOne(
-                                  fontSize: 20, color: Colors.black),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: buildHeaderDelegate(
+                minHeight: size.height * 0.15,
+                maxHeight: size.height * 0.15,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                      height: size.height * 0.15,
+                      decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(10.0)
+                      ),
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            width: size.width / 1.35,
+                            //color: Colors.grey.withOpacity(0.2),
+                            child: TextField(
+                              style: TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                                  labelText: "បន្ថែមពត៍មាន ....!",
+                                  labelStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
+                                  border: InputBorder.none
+                              ),
+                              maxLines: 5,
                             ),
                           ),
-                        ),
+                          Expanded(
+                            child: Container(
+                              height: size.height,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: Colors.grey
+                              ),
+                              child: Icon(MdiIcons.image,color: Colors.white,),
+                            ),
+                          )
+                        ],
+                      )
+                  ),
+                )
+              ),
+            ),
+//            SliverToBoxAdapter(
+//              child: Container(
+//                //Body Sliver ToboxAdapter
+//                height: size.height * 0.1,
+//                //color: Colors.blue,
+//                child: Row(
+//                  children: <Widget>[
+//                    Padding(
+//                      padding: const EdgeInsets.symmetric(
+//                          horizontal: 10, vertical: 15),
+//                      child: InkWell(
+//                        onTap: () {},
+//                        child: Container(
+//                          decoration: BoxDecoration(
+//                            boxShadow: [
+//                              BoxShadow(
+//                                  color: Colors.white,
+//                                  blurRadius: 5,
+//                                  spreadRadius: 1)
+//                            ],
+//                            borderRadius: BorderRadius.circular(10.0),
+//                            color: Colors.white,
+//                          ),
+//                          width: size.width / 2,
+//                          child: Center(
+//                            child: Text(
+//                              "Save",
+//                              style: GoogleFonts.fredokaOne(
+//                                  fontSize: 20, color: Colors.black),
+//                            ),
+//                          ),
+//                        ),
+//                      ),
+//                    ),
+//                    Spacer(),
+//                    Padding(
+//                        padding: const EdgeInsets.only(
+//                          left: 20,
+//                        ),
+//                        child: InkWell(
+//                          child: Icon(
+//                            MdiIcons.noteText,
+//                            color: Colors.white,
+//                            size: 40,
+//                          ),
+//                          onTap: () {
+//                            _buttonpopuptextfield(context);
+//                          },
+//                        )),
+//                    Padding(
+//                      padding: const EdgeInsets.only(left: 20, right: 10),
+//                      child: InkWell(
+//                        onTap: () {
+//                          importfromgallary();
+//                        },
+//                        child: Icon(
+//                          MdiIcons.image,
+//                          color: Colors.white,
+//                          size: 40,
+//                        ),
+//                      ),
+//                    )
+//                  ],
+//                ),
+//              ),
+//            ),
+//            SliverFillRemaining(
+//              child: Container(),
+//            )
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                  Text(
+                  "លក្ខណះនំ",
+                  style: GoogleFonts.fredokaOne(
+                      fontSize: 20, color: Colors.white),
+                ),
+                    Container(
+                      height: size.height * 0.2,
+                      color: Colors.amber,
+                      child: Column(
+                        children: <Widget>[
+                          TabBar(
+                            tabs: <Widget>[],
+                          )
+                        ],
                       ),
                     ),
-                    Spacer(),
-                    Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20,
-                        ),
-                        child: InkWell(
-                          child: Icon(
-                            MdiIcons.noteText,
-                            color: Colors.white,
-                            size: 40,
-                          ),
-                          onTap: () {
-                            _buttonpopuptextfield(context);
-                          },
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 10),
-                      child: InkWell(
-                        onTap: () {
-                          importfromgallary();
-                        },
-                        child: Icon(
-                          MdiIcons.image,
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),
