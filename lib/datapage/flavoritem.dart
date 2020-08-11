@@ -16,8 +16,9 @@ class _FlavorItemsState extends State<FlavorItems> {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(right: 10),
           child: InkWell(
+            borderRadius: BorderRadius.circular(08.0),
             onTap: () {
               setState(() {
                 oncheck = !oncheck;
@@ -28,7 +29,7 @@ class _FlavorItemsState extends State<FlavorItems> {
               decoration: BoxDecoration(
                   //border: Border.all(width: 1, color: Colors.white),
                   //boxShadow: [BoxShadow(color: Color(0xffff9068),blurRadius:5.0,offset: (Offset(0.0,5.0)),spreadRadius: 0.1)],
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(10.0),
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -43,7 +44,7 @@ class _FlavorItemsState extends State<FlavorItems> {
           ),
         ),
         Positioned(
-          top: size.height * 0.015,
+          top: size.height * 0.001,
           right: size.width * 0.03,
           child: oncheck == true
               ? FaIcon(

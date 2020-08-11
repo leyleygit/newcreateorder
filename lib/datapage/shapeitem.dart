@@ -16,8 +16,9 @@ class _ShapeItemsState extends State<ShapeItems> {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(right: 10),
           child: InkWell(
+            borderRadius: BorderRadius.circular(08.0),
             onTap: (){
               setState(() {
                 oncheck = !oncheck;
@@ -27,7 +28,7 @@ class _ShapeItemsState extends State<ShapeItems> {
               width: size.width * 0.3,
               decoration: BoxDecoration(
                 gradient: LinearGradient(colors: [Color(0xff0ED2F7),Color(0xff2196f3)]),
-                borderRadius: BorderRadius.circular(15.0)
+                borderRadius: BorderRadius.circular(10.0)
               ),
               child: Center(
                 child: Text(widget.nameshape,style: TextStyle(fontSize: 17,color: Colors.white),),
@@ -36,8 +37,8 @@ class _ShapeItemsState extends State<ShapeItems> {
           ),
         ),
         Positioned(
-          top: size.height * 0.015,
-          right: size.width * 0.03,
+          top: size.height * 0.002,
+          right: size.width * 0.032,
           child: oncheck == true
               ? FaIcon(
             FontAwesomeIcons.checkCircle,

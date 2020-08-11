@@ -16,8 +16,9 @@ class _ColorItemsState extends State<ColorItems> {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(right: 10.0),
           child: InkWell(
+            borderRadius: BorderRadius.circular(8.0),
             onTap: (){
               setState(() {
                 oncheck = ! oncheck;
@@ -26,7 +27,7 @@ class _ColorItemsState extends State<ColorItems> {
             child: Container(
               width: size.width * 0.3,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(10.0),
                   gradient: LinearGradient(
                       begin: Alignment.bottomLeft,
                       end: Alignment.bottomRight,
@@ -41,8 +42,8 @@ class _ColorItemsState extends State<ColorItems> {
           ),
         ),
         Positioned(
-          top: size.height * 0.015,
-          right: size.width * 0.03,
+          top: size.height * 0.002,
+          right: size.width * 0.033,
           child: oncheck == true
               ? FaIcon(
             FontAwesomeIcons.checkCircle,
