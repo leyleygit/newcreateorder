@@ -306,7 +306,6 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                               width: size.width / 1.35,
                               //color: Colors.grey.withOpacity(0.2),
                               child: TextField(
-                                textInputAction: TextInputAction.done,
                                 style: TextStyle(color: Colors.white),
                                 decoration: InputDecoration(
                                     contentPadding:
