@@ -306,6 +306,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                               width: size.width / 1.35,
                               //color: Colors.grey.withOpacity(0.2),
                               child: TextField(
+                                textInputAction: TextInputAction.done,
                                 style: TextStyle(color: Colors.white),
                                 decoration: InputDecoration(
                                     contentPadding:
@@ -320,7 +321,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                             Expanded(
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(0.8),
-                                onTap: (){
+                                onTap: () {
                                   setState(() {
                                     importfromgallary();
                                   });
@@ -341,101 +342,120 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                         )),
                   )),
             ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 10,),
-                    Text(
-                      "រស់ជាតិ",
-                      style: GoogleFonts.fredokaOne(
-                          fontSize: 20, color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      height: size.height * 0.08,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: nameflavor.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return FlavorItems(nameflavor: nameflavor[index],);
-                        },
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(10.0)),
-                    ),
-                    Text(
-                      "ពណ៍",
-                      style: GoogleFonts.fredokaOne(
-                          fontSize: 20, color: Colors.white),
-                    ),
-                    SizedBox(height: 5,),
-                    Container(
-                      height: size.height * 0.08,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: namecolor.length,
-                        itemBuilder: (BuildContext context, int index) {
-                        return ColorItems(namecolor: namecolor[index],);
-                      },),
-                      decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(10.0)),
-                    ),
-                    Text(
-                      "រូបរាង",
-                      style: GoogleFonts.fredokaOne(
-                          fontSize: 20, color: Colors.white),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      height: size.height * 0.08,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: nameshape.length,
-                        itemBuilder: (BuildContext context, int index) {
-                        return ShapeItems(nameshape: nameshape[index]);
-                      },),
-                      decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(10.0)),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Center(
-                      child: Container(
-                        width: size.width / 2,
-                        height: size.height * 0.05,
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.white,
-                                  blurRadius: 6.0,
-                                  spreadRadius: 1)
-                            ],
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10.0)),
-                        child: Center(
-                          child: Text(
-                            "Save",
-                            style: GoogleFonts.pacifico(
-                                letterSpacing: 10, fontSize: 20),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: buildHeaderDelegate(
+                maxHeight: size.height * 0.47,
+                minHeight: size.height * 0.47,
+                child: Container(
+                  //color:Colors.yellow,
+                  height: size.height * 0.47,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "រស់ជាតិ",
+                          style: GoogleFonts.fredokaOne(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          height: size.height * 0.07,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: nameflavor.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return FlavorItems(
+                                nameflavor: nameflavor[index],
+                              );
+                            },
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(10.0)),
+                        ),
+                        Text(
+                          "ពណ៍",
+                          style: GoogleFonts.fredokaOne(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          height: size.height * 0.07,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: namecolor.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ColorItems(
+                                namecolor: namecolor[index],
+                              );
+                            },
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(10.0)),
+                        ),
+                        Text(
+                          "រូបរាង",
+                          style: GoogleFonts.fredokaOne(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Container(
+                          height: size.height * 0.07,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: nameshape.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ShapeItems(nameshape: nameshape[index]);
+                            },
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(10.0)),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.03,
+                        ),
+                        Center(
+                          child: Container(
+                            width: size.width / 2,
+                            height: size.height * 0.05,
+                            decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.white,
+                                      blurRadius: 6.0,
+                                      spreadRadius: 1)
+                                ],
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10.0)),
+                            child: Center(
+                              child: Text(
+                                "Save",
+                                style: GoogleFonts.pacifico(
+                                    letterSpacing: 10, fontSize: 20),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ],
                     ),
-                    SizedBox(
-                      height: 10,
-                    )
-                  ],
+                  ),
                 ),
               ),
             )
@@ -443,163 +463,6 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
         ),
       ),
     );
-  }
-
-  void _buttonpopuptextfield(context) {
-    showModalBottomSheet(
-        context: context,
-        backgroundColor: Colors.transparent,
-        builder: (BuildContext btp) {
-          return ListView(
-            children: [
-              Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Colors.white,
-                  ),
-                  height: MediaQuery.of(context).size.height,
-                  //padding: EdgeInsets.only(left: 10, right: 10),
-                  child: CustomScrollView(
-                    slivers: <Widget>[
-                      SliverAppBar(
-                        pinned: true,
-                        automaticallyImplyLeading: false,
-                        backgroundColor: Colors.transparent,
-                        title: Text(
-                          "បន្ថែមពត៍មានពីនំ",
-                          style: GoogleFonts.fredokaOne(
-                              fontSize: 20, color: Colors.black54),
-                        ),
-                        actions: <Widget>[
-                          IconButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              icon: Icon(
-                                FontAwesomeIcons.checkCircle,
-                                size: 30,
-                                color: Color(0xffff4b1f),
-                              )),
-                        ],
-                      ),
-                      SliverToBoxAdapter(
-                        child: Container(
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          height: MediaQuery.of(context).size.height * 0.15,
-                          //color: Colors.purple.withOpacity(0.2),
-                          child: TextField(
-                            decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Color(0xffff4b1f))),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0)),
-                                hintText: "Description"),
-                            maxLines: 4,
-                          ),
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: Container(
-                          padding:
-                              EdgeInsets.only(left: 10, top: 10, right: 10),
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          //color: Colors.yellow,
-                          child: Row(
-                            children: <Widget>[
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    "Type of food",
-                                    style: GoogleFonts.raleway(
-                                        fontSize: 15, color: Color(0xffff4b1f)),
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    "Coffee・Ice Cream,Thai",
-                                    style: GoogleFonts.abel(
-                                        fontSize: 15, color: Colors.black),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: Container(
-                          padding:
-                              EdgeInsets.only(left: 10, top: 10, right: 10),
-                          height: MediaQuery.of(context).size.height * 0.15,
-                          //color: Colors.yellow,
-                          child: Row(
-                            children: <Widget>[
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    "Address",
-                                    style: GoogleFonts.raleway(
-                                        fontSize: 15, color: Color(0xffff4b1f)),
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    "#184,St 155 \nSangkat Toul Tompong \n Khan Chomkamorn \n Phnom Penh",
-                                    style: GoogleFonts.abel(
-                                        fontSize: 15, color: Colors.black),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: Container(
-                          //color: Colors.yellow,
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          //color: Colors.yellow,
-                          child: Row(
-                            children: <Widget>[
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    "Contact",
-                                    style: GoogleFonts.raleway(
-                                        fontSize: 15, color: Color(0xffff4b1f)),
-                                  ),
-                                ],
-                              ),
-                              Spacer(),
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    "081 828 288 / 015 704 034",
-                                    style: GoogleFonts.abel(
-                                        fontSize: 15, color: Colors.black),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-//                  SliverFillRemaining(
-//                    child: Container(),
-//                  )
-                    ],
-                  )),
-            ],
-          );
-        });
   }
 }
 

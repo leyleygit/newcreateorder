@@ -25,7 +25,7 @@ class _FlavorItemsState extends State<FlavorItems> {
               });
             },
             child: Container(
-              width: 100,
+              width: size.width * 0.33,
               decoration: BoxDecoration(
                   //border: Border.all(width: 1, color: Colors.white),
                   //boxShadow: [BoxShadow(color: Color(0xffff9068),blurRadius:5.0,offset: (Offset(0.0,5.0)),spreadRadius: 0.1)],

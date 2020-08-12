@@ -25,7 +25,7 @@ class _ColorItemsState extends State<ColorItems> {
               });
             },
             child: Container(
-              width: size.width * 0.3,
+              width: size.width * 0.33,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   gradient: LinearGradient(
@@ -42,8 +42,8 @@ class _ColorItemsState extends State<ColorItems> {
           ),
         ),
         Positioned(
-          top: size.height * 0.002,
-          right: size.width * 0.033,
+          top: 0,
+          right: size.width * 0.03,
           child: oncheck == true
               ? FaIcon(
             FontAwesomeIcons.checkCircle,
