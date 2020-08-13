@@ -3,13 +3,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FlavorItems extends StatefulWidget {
   final String nameflavor;
-  const FlavorItems({Key key, this.nameflavor}) : super(key: key);
+  FlavorItems({Key key, this.nameflavor}) : super(key: key);
+  bool oncheck = false;
+//  get oncheck => _oncheck;
+//  set oncheck(val) => _oncheck = val;
+
   @override
   _FlavorItemsState createState() => _FlavorItemsState();
 }
 
 class _FlavorItemsState extends State<FlavorItems> {
-  bool oncheck = false;
+  // bool onCheck = false;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -21,7 +25,7 @@ class _FlavorItemsState extends State<FlavorItems> {
             borderRadius: BorderRadius.circular(08.0),
             onTap: () {
               setState(() {
-                oncheck = !oncheck;
+                widget.oncheck = !widget.oncheck;
               });
             },
             child: Container(
@@ -46,7 +50,7 @@ class _FlavorItemsState extends State<FlavorItems> {
         Positioned(
           top: size.height * 0.001,
           right: size.width * 0.03,
-          child: oncheck == true
+          child: widget.oncheck == true
               ? FaIcon(
                   FontAwesomeIcons.checkCircle,
                   color: Colors.white,

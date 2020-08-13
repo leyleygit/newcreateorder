@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ColorItems extends StatefulWidget {
   final String namecolor ;
+  bool oncheck = false;
+//  get oncheck => _oncheck;
+//  set oncheck(val)=> _oncheck=val;
 
-  const ColorItems({Key key, this.namecolor}) : super(key: key);
+  ColorItems({Key key, this.namecolor}) : super(key: key);
   @override
   _ColorItemsState createState() => _ColorItemsState();
 }
 
 class _ColorItemsState extends State<ColorItems> {
-  bool oncheck = false;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -21,7 +24,7 @@ class _ColorItemsState extends State<ColorItems> {
             borderRadius: BorderRadius.circular(8.0),
             onTap: (){
               setState(() {
-                oncheck = ! oncheck;
+                widget.oncheck = ! widget.oncheck;
               });
             },
             child: Container(
@@ -44,7 +47,7 @@ class _ColorItemsState extends State<ColorItems> {
         Positioned(
           top: 0,
           right: size.width * 0.03,
-          child: oncheck == true
+          child: widget.oncheck == true
               ? FaIcon(
             FontAwesomeIcons.checkCircle,
             color: Colors.white,
