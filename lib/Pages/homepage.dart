@@ -380,15 +380,12 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           ),
                           Text(
                             "រស់ជាតិ",
                             style: GoogleFonts.fredokaOne(
                                 fontSize: 20, color: Colors.white),
-                          ),
-                          SizedBox(
-                            height: 5,
                           ),
                           Container(
                             height: size.height * 0.07,
@@ -410,9 +407,6 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                             style: GoogleFonts.fredokaOne(
                                 fontSize: 20, color: Colors.white),
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
                           Container(
                             height: size.height * 0.07,
                             child: ListView.builder(
@@ -433,9 +427,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                             style: GoogleFonts.fredokaOne(
                                 fontSize: 20, color: Colors.white),
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
+
                           Container(
                             height: size.height * 0.07,
                             child: ListView.builder(
@@ -450,7 +442,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                 borderRadius: BorderRadius.circular(10.0)),
                           ),
                           SizedBox(
-                            height: size.height * 0.03,
+                            height: size.height * 0.02,
                           ),
                           Center(
                             child: InkWell(
@@ -487,9 +479,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          )
+
                         ],
                       ),
                     ),
