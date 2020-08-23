@@ -106,10 +106,18 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
   FlavorItems flavorItems = FlavorItems();
   ColorItems colorItems = ColorItems();
   ShapeItems shapeItems = ShapeItems();
+  AnimationController _priceAnimationController;
+  Animation _priceAnimation;
+  bool priceAnimation;
   @override
   void initState() {
     _controller = TabController(vsync: this, length: mytab.length);
     _image = [];
+    priceAnimation = false;
+    _priceAnimation = CurvedAnimation(
+        curve: Curves.bounceInOut, parent: _priceAnimationController);
+    _priceAnimationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
     super.initState();
   }
 
@@ -164,17 +172,29 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                     actions: <Widget>[
                       Padding(
                           padding: const EdgeInsets.only(right: 10),
-                          child: Text(
-                            "${pricecake[i]}",
-                            style: GoogleFonts.pacifico(
-                                color: Colors.white,
-                                fontSize: 30,
-                                shadows: [
-                                  BoxShadow(
-                                      color: Colors.white,
-                                      blurRadius: 20,
-                                      spreadRadius: 5)
-                                ]),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                priceAnimation =!priceAnimation;
+                                if (_priceAnimation.value == 0) {
+                                  _priceAnimationController.forward(from: 0.0);
+                                } else {
+                                  _priceAnimationController.reverse(from: 1.0);
+                                }
+                              });
+                            },
+                            child: Text(
+                              "${pricecake[i]}",
+                              style: GoogleFonts.pacifico(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  shadows: [
+                                    BoxShadow(
+                                        color: Colors.white,
+                                        blurRadius: 20,
+                                        spreadRadius: 5)
+                                  ]),
+                            ),
                           ))
                     ],
                   ),
@@ -504,7 +524,8 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
             ),
           ),
           Transform(
-            transform: Matrix4.translationValues(0.0, 0.0, 0.0),
+            transform: Matrix4.translationValues(
+                size.width , 0.0, 0.0),
             child: Container(
                 width: size.width,
                 height: size.height,
@@ -515,13 +536,11 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                       backgroundColor: Colors.blue,
                       leading: Icon(Icons.search),
                       title: TextField(
-                        decoration: InputDecoration(
-
-                        ),
+                        decoration: InputDecoration(),
                       ),
                       actions: <Widget>[
                         InkWell(
-                          onTap: (){
+                          onTap: () {
                             print("adsfs");
                           },
                           child: Container(
