@@ -107,18 +107,19 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
   ColorItems colorItems = ColorItems();
   ShapeItems shapeItems = ShapeItems();
   AnimationController _priceAnimationController;
-  Animation _priceAnimation ;
+  Animation _priceAnimation;
   bool priceAnimation;
   @override
   void initState() {
     _controller = TabController(vsync: this, length: mytab.length);
     _image = [];
     priceAnimation = false;
-    _priceAnimationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+    _priceAnimationController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 200), value: 0.0);
     _priceAnimation = CurvedAnimation(
-        curve: Curves.bounceInOut, parent: _priceAnimationController);
+        curve: Curves.bounceInOut, parent: _priceAnimationController)..addListener(() {setState(() {
 
+        });});
     super.initState();
   }
 
@@ -176,9 +177,13 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-
-
+                                if (_priceAnimation.value == 0) {
+                                  _priceAnimationController.forward(from: 0.0);
+                                } else {
+                                  _priceAnimationController.reverse(from: 1.0);
+                                }
                               });
+
                             },
                             child: Text(
                               "${pricecake[i]}",
@@ -217,8 +222,8 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                   //body ListView Camera
                                   height: size.height * 0.2,
                                   decoration: BoxDecoration(
-                                      //border: Border.all(width: 2, color: Colors.white)
-                                      ),
+                                    //border: Border.all(width: 2, color: Colors.white)
+                                  ),
                                   child: ListView.builder(
                                       itemCount: _image.length + 1,
                                       scrollDirection: Axis.horizontal,
@@ -226,58 +231,58 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                           (BuildContext context, int index) {
                                         return index == 0
                                             ? Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: InkWell(
-                                                  onTap: getImage,
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.grey
-                                                            .withOpacity(0.3),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5.0)),
-                                                    width: 60,
-                                                    child: Icon(
-                                                      MdiIcons.camera,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
+                                          padding:
+                                          const EdgeInsets.all(8.0),
+                                          child: InkWell(
+                                            onTap: getImage,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.3),
+                                                  borderRadius:
+                                                  BorderRadius
+                                                      .circular(5.0)),
+                                              width: 60,
+                                              child: Icon(
+                                                MdiIcons.camera,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        )
                                             : Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 4.0),
-                                                child: GestureDetector(
-                                                  onLongPress: () {
-                                                    setState(() {
-                                                      _image
-                                                          .removeAt(index - 1);
-                                                    });
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Container(
-                                                      width: size.width * 0.25,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.0),
-                                                          image:
-                                                              DecorationImage(
-                                                            fit: BoxFit.cover,
-                                                            image: AssetImage(
-                                                                _image[index -
-                                                                        1]
-                                                                    .path),
-                                                          )),
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 4.0),
+                                          child: GestureDetector(
+                                            onLongPress: () {
+                                              setState(() {
+                                                _image
+                                                    .removeAt(index - 1);
+                                              });
+                                            },
+                                            child: Padding(
+                                              padding:
+                                              const EdgeInsets.all(
+                                                  8.0),
+                                              child: Container(
+                                                width: size.width * 0.25,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                    BorderRadius
+                                                        .circular(
+                                                        10.0),
+                                                    image:
+                                                    DecorationImage(
+                                                      fit: BoxFit.cover,
+                                                      image: AssetImage(
+                                                          _image[index -
+                                                              1]
+                                                              .path),
+                                                    )),
+                                              ),
+                                            ),
+                                          ),
+                                        );
                                       }),
                                 )
                               ],
@@ -305,7 +310,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                             // color: Colors.yellow,
                             child: GridView.builder(
                               gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
+                              SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                               ),
                               scrollDirection: Axis.horizontal,
@@ -379,7 +384,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                         height: size.height,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(10.0),
+                                            BorderRadius.circular(10.0),
                                             color: Colors.grey),
                                         child: Icon(
                                           MdiIcons.image,
@@ -499,7 +504,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                         ],
                                         color: Colors.white,
                                         borderRadius:
-                                            BorderRadius.circular(10.0)),
+                                        BorderRadius.circular(10.0)),
                                     child: Center(
                                       child: Text(
                                         "Save",
@@ -522,15 +527,17 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
           ),
           Transform(
             transform: Matrix4.translationValues(
-                size.width * _priceAnimation.value, 0.0, 0.0),
+                size.width - (size.width * _priceAnimation.value),
+                0.0,
+                0.0),
             child: Container(
                 width: size.width,
                 height: size.height,
-                color: Colors.yellow,
+                color: Colors.grey,
                 child: CustomScrollView(
                   slivers: <Widget>[
                     SliverAppBar(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Colors.red,
                       leading: Icon(Icons.search),
                       title: TextField(
                         decoration: InputDecoration(),
@@ -538,13 +545,9 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                       actions: <Widget>[
                         InkWell(
                           onTap: () {
-                           setState(() {
-                             if (_priceAnimation.value == 0) {
-                               _priceAnimationController.forward(from: 0.0);
-                             } else {
-                               _priceAnimationController.reverse(from: 1.0);
-                             }
-                           });
+                            setState(() {
+                              _priceAnimationController.reverse(from: 1.0);
+                            });
                           },
                           child: Container(
                             width: size.width * 0.25,
@@ -555,15 +558,17 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                     bottomLeft: Radius.circular(10.0))),
                             child: Center(
                                 child: Text("Add",
-                                    style: GoogleFonts.sacramento(
-                                        color: Colors.black, fontSize: 30))),
+                                    style: GoogleFonts.aclonica(
+                                        color: Colors.black, fontSize: 20))),
                           ),
                         )
                       ],
-                    )
+                    ),
+
                   ],
                 )),
-          )
+          ),
+
         ],
       ),
     );
