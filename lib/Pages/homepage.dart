@@ -107,17 +107,18 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
   ColorItems colorItems = ColorItems();
   ShapeItems shapeItems = ShapeItems();
   AnimationController _priceAnimationController;
-  Animation _priceAnimation;
+  Animation _priceAnimation ;
   bool priceAnimation;
   @override
   void initState() {
     _controller = TabController(vsync: this, length: mytab.length);
     _image = [];
     priceAnimation = false;
-    _priceAnimation = CurvedAnimation(
-        curve: Curves.bounceInOut, parent: _priceAnimationController);
     _priceAnimationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+    _priceAnimation = CurvedAnimation(
+        curve: Curves.bounceInOut, parent: _priceAnimationController);
+
     super.initState();
   }
 
@@ -175,12 +176,8 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                priceAnimation =!priceAnimation;
-                                if (_priceAnimation.value == 0) {
-                                  _priceAnimationController.forward(from: 0.0);
-                                } else {
-                                  _priceAnimationController.reverse(from: 1.0);
-                                }
+
+
                               });
                             },
                             child: Text(
@@ -525,7 +522,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
           ),
           Transform(
             transform: Matrix4.translationValues(
-                size.width , 0.0, 0.0),
+                size.width * _priceAnimation.value, 0.0, 0.0),
             child: Container(
                 width: size.width,
                 height: size.height,
@@ -541,7 +538,13 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                       actions: <Widget>[
                         InkWell(
                           onTap: () {
-                            print("adsfs");
+                           setState(() {
+                             if (_priceAnimation.value == 0) {
+                               _priceAnimationController.forward(from: 0.0);
+                             } else {
+                               _priceAnimationController.reverse(from: 1.0);
+                             }
+                           });
                           },
                           child: Container(
                             width: size.width * 0.25,
