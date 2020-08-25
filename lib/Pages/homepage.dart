@@ -533,14 +533,45 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
             child: Container(
                 width: size.width,
                 height: size.height,
-                color: Colors.grey,
+                //color: Colors.white,
+                color: Color(0xff131313),
                 child: CustomScrollView(
                   slivers: <Widget>[
                     SliverAppBar(
-                      backgroundColor: Colors.red,
-                      leading: Icon(Icons.search),
-                      title: TextField(
-                        decoration: InputDecoration(),
+                      //backgroundColor: Colors.white,
+                      backgroundColor: Color(0xff131313),
+                      title: Container(
+
+                        height: size.height * 0.05,
+                        child: TextField(
+
+                          style: TextStyle(color: Colors.grey),
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(color: Colors.teal)
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:BorderRadius.circular(10.0),
+                              borderSide: BorderSide(
+
+                                width: 2,
+                                color: Colors.teal
+                              )
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide:  BorderSide(
+                                width: 2
+                              ),
+
+                            ),
+                            suffixText: 'USD',
+                            suffixStyle: TextStyle(color: Colors.grey),
+                            prefixIcon: const Icon(Icons.attach_money, color: Colors.grey,),
+                          ),
+                        ),
                       ),
                       actions: <Widget>[
                         InkWell(
