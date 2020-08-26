@@ -109,6 +109,8 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
   AnimationController _priceAnimationController;
   Animation _priceAnimation;
   bool priceAnimation;
+  bool oncheck = false;
+  int curIndex =0;
   @override
   void initState() {
     _controller = TabController(vsync: this, length: mytab.length);
@@ -117,9 +119,10 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
     _priceAnimationController = AnimationController(
         vsync: this, duration: Duration(milliseconds: 200), value: 0.0);
     _priceAnimation = CurvedAnimation(
-        curve: Curves.bounceInOut, parent: _priceAnimationController)..addListener(() {setState(() {
-
-        });});
+        curve: Curves.bounceInOut, parent: _priceAnimationController)
+      ..addListener(() {
+        setState(() {});
+      });
     super.initState();
   }
 
@@ -137,6 +140,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
   }
 
   FocusNode desFocus = FocusNode();
+  FocusNode desFocusprice = FocusNode();
   TextEditingController desController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -183,10 +187,9 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                   _priceAnimationController.reverse(from: 1.0);
                                 }
                               });
-
                             },
                             child: Text(
-                              "${pricecake[i]}",
+                              "${pricecake[curIndex]}",
                               style: GoogleFonts.pacifico(
                                   color: Colors.white,
                                   fontSize: 30,
@@ -222,8 +225,8 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                   //body ListView Camera
                                   height: size.height * 0.2,
                                   decoration: BoxDecoration(
-                                    //border: Border.all(width: 2, color: Colors.white)
-                                  ),
+                                      //border: Border.all(width: 2, color: Colors.white)
+                                      ),
                                   child: ListView.builder(
                                       itemCount: _image.length + 1,
                                       scrollDirection: Axis.horizontal,
@@ -231,58 +234,58 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                           (BuildContext context, int index) {
                                         return index == 0
                                             ? Padding(
-                                          padding:
-                                          const EdgeInsets.all(8.0),
-                                          child: InkWell(
-                                            onTap: getImage,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.3),
-                                                  borderRadius:
-                                                  BorderRadius
-                                                      .circular(5.0)),
-                                              width: 60,
-                                              child: Icon(
-                                                MdiIcons.camera,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        )
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: InkWell(
+                                                  onTap: getImage,
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.3),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5.0)),
+                                                    width: 60,
+                                                    child: Icon(
+                                                      MdiIcons.camera,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
                                             : Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 4.0),
-                                          child: GestureDetector(
-                                            onLongPress: () {
-                                              setState(() {
-                                                _image
-                                                    .removeAt(index - 1);
-                                              });
-                                            },
-                                            child: Padding(
-                                              padding:
-                                              const EdgeInsets.all(
-                                                  8.0),
-                                              child: Container(
-                                                width: size.width * 0.25,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(
-                                                        10.0),
-                                                    image:
-                                                    DecorationImage(
-                                                      fit: BoxFit.cover,
-                                                      image: AssetImage(
-                                                          _image[index -
-                                                              1]
-                                                              .path),
-                                                    )),
-                                              ),
-                                            ),
-                                          ),
-                                        );
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 4.0),
+                                                child: GestureDetector(
+                                                  onLongPress: () {
+                                                    setState(() {
+                                                      _image
+                                                          .removeAt(index - 1);
+                                                    });
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Container(
+                                                      width: size.width * 0.25,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
+                                                          image:
+                                                              DecorationImage(
+                                                            fit: BoxFit.cover,
+                                                            image: AssetImage(
+                                                                _image[index -
+                                                                        1]
+                                                                    .path),
+                                                          )),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
                                       }),
                                 )
                               ],
@@ -290,56 +293,56 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                           ),
                         )),
                   ),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "តម្លៃនំ",
-                            style: GoogleFonts.fredokaOne(
-                                fontSize: 20, color: Colors.white),
-                          ),
-                          Container(
-                            //width: size.width * 1.0,
-                            height: size.height * 0.2,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            // color: Colors.yellow,
-                            child: GridView.builder(
-                              gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                              ),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: pricecake.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10),
-                                    onTap: () {
-                                      setState(() {
-                                        i = index;
-                                      });
-                                    },
-                                    child: PriceItems(
-                                      index: i,
-                                      selectprice: index == i ? true : false,
-                                      pricecake: pricecake[index],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+//                  SliverToBoxAdapter(
+//                    child: Padding(
+//                      padding: const EdgeInsets.only(left: 15, right: 15),
+//                      child: Column(
+//                        crossAxisAlignment: CrossAxisAlignment.start,
+//                        children: <Widget>[
+//                          Text(
+//                            "តម្លៃនំ",
+//                            style: GoogleFonts.fredokaOne(
+//                                fontSize: 20, color: Colors.white),
+//                          ),
+//                          Container(
+//                            //width: size.width * 1.0,
+//                            height: size.height * 0.2,
+//                            decoration: BoxDecoration(
+//                              borderRadius: BorderRadius.circular(10.0),
+//                            ),
+//                            // color: Colors.yellow,
+//                            child: GridView.builder(
+//                              gridDelegate:
+//                              SliverGridDelegateWithFixedCrossAxisCount(
+//                                crossAxisCount: 2,
+//                              ),
+//                              scrollDirection: Axis.horizontal,
+//                              itemCount: pricecake.length,
+//                              itemBuilder: (BuildContext context, int index) {
+//                                return Padding(
+//                                  padding: const EdgeInsets.all(8.0),
+//                                  child: InkWell(
+//                                    splashColor: Colors.transparent,
+//                                    borderRadius: BorderRadius.circular(10),
+//                                    onTap: () {
+//                                      setState(() {
+//                                        i = index;
+//                                      });
+//                                    },
+//                                    child: PriceItems(
+//                                      index: i,
+//                                      selectprice: index == i ? true : false,
+//                                      pricecake: pricecake[index],
+//                                    ),
+//                                  ),
+//                                );
+//                              },
+//                            ),
+//                          ),
+//                        ],
+//                      ),
+//                    ),
+//                  ),
                   SliverPersistentHeader(
                     pinned: true,
                     delegate: buildHeaderDelegate(
@@ -384,7 +387,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                         height: size.height,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                            BorderRadius.circular(10.0),
+                                                BorderRadius.circular(10.0),
                                             color: Colors.grey),
                                         child: Icon(
                                           MdiIcons.image,
@@ -486,10 +489,10 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                     setState(() {
                                       _image = [];
                                       desController.clear();
-                                      i = 0;
                                       flavorItems.oncheck = false;
                                       colorItems.oncheck = false;
                                       shapeItems.oncheck = false;
+                                      curIndex = 0;
                                     });
                                   },
                                   child: Container(
@@ -504,7 +507,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                         ],
                                         color: Colors.white,
                                         borderRadius:
-                                        BorderRadius.circular(10.0)),
+                                            BorderRadius.circular(10.0)),
                                     child: Center(
                                       child: Text(
                                         "Save",
@@ -527,79 +530,208 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
           ),
           Transform(
             transform: Matrix4.translationValues(
-                size.width - (size.width * _priceAnimation.value),
-                0.0,
-                0.0),
-            child: Container(
-                width: size.width,
-                height: size.height,
-                //color: Colors.white,
-                color: Color(0xff131313),
-                child: CustomScrollView(
-                  slivers: <Widget>[
-                    SliverAppBar(
-                      //backgroundColor: Colors.white,
-                      backgroundColor: Color(0xff131313),
-                      title: Container(
-
-                        height: size.height * 0.05,
-                        child: TextField(
-
-                          style: TextStyle(color: Colors.grey),
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(color: Colors.teal)
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius:BorderRadius.circular(10.0),
-                              borderSide: BorderSide(
-
-                                width: 2,
-                                color: Colors.teal
-                              )
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide:  BorderSide(
-                                width: 2
+                size.width - (size.width * _priceAnimation.value), 0.0, 0.0),
+            child: GestureDetector(
+              onTap: () {
+                if (desFocusprice.hasFocus) {
+                  setState(() {
+                    desFocusprice.unfocus();
+                  });
+                } else {
+                  return null;
+                }
+              },
+              child: Container(
+                  width: size.width,
+                  height: size.height,
+                  //color: Colors.white,
+                  color: Color(0xff131313),
+                  child: CustomScrollView(
+                    slivers: <Widget>[
+                      SliverAppBar(
+                        //backgroundColor: Colors.white,
+                        backgroundColor: Color(0xff131313),
+                        pinned: true,
+                        title: Container(
+                          height: size.height * 0.05,
+                          child: TextField(
+                            focusNode: desFocusprice,
+                            style: TextStyle(color: Colors.grey),
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide(color: Colors.white)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide:
+                                      BorderSide(width: 2, color: Colors.teal)),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(width: 2),
                               ),
-
+                              suffixText: 'USD',
+                              suffixStyle: TextStyle(color: Colors.grey),
+                              prefixIcon: const Icon(
+                                Icons.attach_money,
+                                color: Colors.grey,
+                              ),
                             ),
-                            suffixText: 'USD',
-                            suffixStyle: TextStyle(color: Colors.grey),
-                            prefixIcon: const Icon(Icons.attach_money, color: Colors.grey,),
                           ),
                         ),
+                        actions: <Widget>[
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                _priceAnimationController.reverse(from: 1.0);
+                              });
+                            },
+                            child: Container(
+                              width: size.width * 0.25,
+                              decoration: BoxDecoration(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15.0),
+                                      bottomLeft: Radius.circular(15.0))),
+                              child: Center(
+                                  child: Text("Add",
+                                      style: GoogleFonts.aclonica(
+                                          color: Colors.white, fontSize: 20))),
+                            ),
+                          )
+                        ],
                       ),
-                      actions: <Widget>[
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              _priceAnimationController.reverse(from: 1.0);
-                            });
-                          },
-                          child: Container(
-                            width: size.width * 0.25,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10.0),
-                                    bottomLeft: Radius.circular(10.0))),
-                            child: Center(
-                                child: Text("Add",
-                                    style: GoogleFonts.aclonica(
-                                        color: Colors.black, fontSize: 20))),
-                          ),
-                        )
-                      ],
-                    ),
+//                      SliverToBoxAdapter(
+//                        child: Container(
+//                          //ListView
+//                          width: size.width,
+//                          height: size.height,
+//                          padding: EdgeInsets.only(left: 10, right: 10),
+//                          child: ListView.builder(
+//                            itemCount: pricecake.length,
+//                            scrollDirection: Axis.vertical,
+//                            itemBuilder: (BuildContext context, int index) {
+//                              return Stack(
+//                                children: [
+//                                  InkWell(
+//                                    onTap: () {
+//                                      setState(() {
+//                                          curIndex = index;
+//                                          oncheck = !oncheck;
+//                                          _priceAnimationController.reverse(from: 1.0);
+//                                        });
+//
+//                                    },
+//                                    child: Padding(
+//                                      padding: const EdgeInsets.all(8.0),
+//                                      child: Container(
+//                                        height: size.height * 0.07,
+//                                        //width: size.width * 0.2,
+//                                        decoration: BoxDecoration(
+//                                          //border: Border.all(width: 2, color: Colors.white70),
+////              color: widget.selectprice == true
+//                                          color: curIndex == index
+//                                              ? Colors.blue.withOpacity(0.7)
+//                                              : Colors.white24,
+//                                          borderRadius:
+//                                              BorderRadius.circular(15.0),
+//                                        ),
+//                                        child: Center(
+//                                          child: Text(pricecake[index],
+//                                              style: GoogleFonts.pacifico(
+//                                                  fontSize: 25,
+//                                                  color: curIndex == index
+//                                                      ? Colors.white
+//                                                      : Colors.black)
+////                    color: widget.selectprice == true ? Colors.white : Colors.black),
+//                                              ),
+//                                        ),
+//                                      ),
+//                                    ),
+//                                  ),
+//                                  Positioned(
+//                                      top: 10,
+//                                      right: 10,
+//                                      child: curIndex == index
+//                                          ? FaIcon(
+//                                              FontAwesomeIcons.checkCircle,
+//                                              color: Colors.white,
+//                                              size: 25,
+//                                            )
+//                                          : FaIcon(
+//                                              FontAwesomeIcons.circle,
+//                                              color: Colors.white,
+//                                              size: 25,
+//                                            ))
+//                                ],
+//                              );
+//                            },
+//                          ),
+//                        ),
+//
+//                      ),
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate((_,index){
+                         return Stack(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    curIndex = index;
+                                    _priceAnimationController.reverse(from: 1.0);
+                                  });
 
-                  ],
-                )),
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    height: size.height * 0.07,
+                                    //width: size.width * 0.2,
+                                    decoration: BoxDecoration(
+                                      //border: Border.all(width: 2, color: Colors.white70),
+//              color: widget.selectprice == true
+                                      color: curIndex == index
+                                          ? Colors.blue.withOpacity(0.7)
+                                          : Colors.white24,
+                                      borderRadius:
+                                      BorderRadius.circular(15.0),
+                                    ),
+                                    child: Center(
+                                      child: Text(pricecake[index],
+                                          style: GoogleFonts.pacifico(
+                                              fontSize: 25,
+                                              color: curIndex == index
+                                                  ? Colors.white
+                                                  : Colors.black)
+//                    color: widget.selectprice == true ? Colors.white : Colors.black),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                  top: 10,
+                                  right: 10,
+                                  child: curIndex == index
+                                      ? FaIcon(
+                                    FontAwesomeIcons.checkCircle,
+                                    color: Colors.white,
+                                    size: 25,
+                                  )
+                                      : FaIcon(
+                                    FontAwesomeIcons.circle,
+                                    color: Colors.white,
+                                    size: 25,
+                                  ))
+                            ],
+                          );
+                        },childCount: pricecake.length),
+                      ),
+
+                    ],
+                  )),
+            ),
           ),
-
         ],
       ),
     );
