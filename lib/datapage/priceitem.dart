@@ -32,8 +32,6 @@ class _PriceItemsState extends State<PriceItems> {
               height: size.height * 0.07,
               //width: size.width * 0.2,
               decoration: BoxDecoration(
-                //border: Border.all(width: 2, color: Colors.white70),
-//              color: widget.selectprice == true
                   color: widget.oncheck == true
                     ? Colors.blue.withOpacity(0.7)
                     : Colors.white24,

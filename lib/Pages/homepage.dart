@@ -19,18 +19,18 @@ class MyHomepage extends StatefulWidget {
 class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
   int i = 0;
   List<String> pricecake = [
-    "5\$",
-    "10\$",
-    "15\$",
-    "20\$",
-    "25\$",
-    "30\$",
-    "35\$",
-    "40\$",
-    "45\$",
-    "50\$",
-    "55\$",
-    "60\$",
+    "5",
+    "10",
+    "15",
+    "20",
+    "25",
+    "30",
+    "35",
+    "40",
+    "45",
+    "50",
+    "55",
+    "60",
   ];
   List<String> nameflavor = [
     "ត្រាវ",
@@ -110,7 +110,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
   Animation _priceAnimation;
   bool priceAnimation;
   bool oncheck = false;
-  int curIndex =0;
+  int curIndex = 0;
   @override
   void initState() {
     _controller = TabController(vsync: this, length: mytab.length);
@@ -189,7 +189,7 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                               });
                             },
                             child: Text(
-                              "${pricecake[curIndex]}",
+                              "${pricecake[curIndex]}\$",
                               style: GoogleFonts.pacifico(
                                   color: Colors.white,
                                   fontSize: 30,
@@ -293,56 +293,6 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                           ),
                         )),
                   ),
-//                  SliverToBoxAdapter(
-//                    child: Padding(
-//                      padding: const EdgeInsets.only(left: 15, right: 15),
-//                      child: Column(
-//                        crossAxisAlignment: CrossAxisAlignment.start,
-//                        children: <Widget>[
-//                          Text(
-//                            "តម្លៃនំ",
-//                            style: GoogleFonts.fredokaOne(
-//                                fontSize: 20, color: Colors.white),
-//                          ),
-//                          Container(
-//                            //width: size.width * 1.0,
-//                            height: size.height * 0.2,
-//                            decoration: BoxDecoration(
-//                              borderRadius: BorderRadius.circular(10.0),
-//                            ),
-//                            // color: Colors.yellow,
-//                            child: GridView.builder(
-//                              gridDelegate:
-//                              SliverGridDelegateWithFixedCrossAxisCount(
-//                                crossAxisCount: 2,
-//                              ),
-//                              scrollDirection: Axis.horizontal,
-//                              itemCount: pricecake.length,
-//                              itemBuilder: (BuildContext context, int index) {
-//                                return Padding(
-//                                  padding: const EdgeInsets.all(8.0),
-//                                  child: InkWell(
-//                                    splashColor: Colors.transparent,
-//                                    borderRadius: BorderRadius.circular(10),
-//                                    onTap: () {
-//                                      setState(() {
-//                                        i = index;
-//                                      });
-//                                    },
-//                                    child: PriceItems(
-//                                      index: i,
-//                                      selectprice: index == i ? true : false,
-//                                      pricecake: pricecake[index],
-//                                    ),
-//                                  ),
-//                                );
-//                              },
-//                            ),
-//                          ),
-//                        ],
-//                      ),
-//                    ),
-//                  ),
                   SliverPersistentHeader(
                     pinned: true,
                     delegate: buildHeaderDelegate(
@@ -552,135 +502,31 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                         //backgroundColor: Colors.white,
                         backgroundColor: Color(0xff131313),
                         pinned: true,
-                        title: Container(
-                          height: size.height * 0.05,
-                          child: TextField(
-                            focusNode: desFocusprice,
-                            style: TextStyle(color: Colors.grey),
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: BorderSide(color: Colors.white)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide:
-                                      BorderSide(width: 2, color: Colors.teal)),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                                borderSide: BorderSide(width: 2),
-                              ),
-                              suffixText: 'USD',
-                              suffixStyle: TextStyle(color: Colors.grey),
-                              prefixIcon: const Icon(
-                                Icons.attach_money,
-                                color: Colors.grey,
-                              ),
-                            ),
+                        centerTitle: true,
+                        title: IconButton(
+                          onPressed: () {
+                            showSearch(
+                                context: context, delegate: SearchData(
+                                pricecake
+                            ));
+                          },
+                          icon: Icon(
+                            Icons.search,
+                            color: Colors.white,
                           ),
                         ),
-                        actions: <Widget>[
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                _priceAnimationController.reverse(from: 1.0);
-                              });
-                            },
-                            child: Container(
-                              width: size.width * 0.25,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(15.0),
-                                      bottomLeft: Radius.circular(15.0))),
-                              child: Center(
-                                  child: Text("Add",
-                                      style: GoogleFonts.aclonica(
-                                          color: Colors.white, fontSize: 20))),
-                            ),
-                          )
-                        ],
                       ),
-//                      SliverToBoxAdapter(
-//                        child: Container(
-//                          //ListView
-//                          width: size.width,
-//                          height: size.height,
-//                          padding: EdgeInsets.only(left: 10, right: 10),
-//                          child: ListView.builder(
-//                            itemCount: pricecake.length,
-//                            scrollDirection: Axis.vertical,
-//                            itemBuilder: (BuildContext context, int index) {
-//                              return Stack(
-//                                children: [
-//                                  InkWell(
-//                                    onTap: () {
-//                                      setState(() {
-//                                          curIndex = index;
-//                                          oncheck = !oncheck;
-//                                          _priceAnimationController.reverse(from: 1.0);
-//                                        });
-//
-//                                    },
-//                                    child: Padding(
-//                                      padding: const EdgeInsets.all(8.0),
-//                                      child: Container(
-//                                        height: size.height * 0.07,
-//                                        //width: size.width * 0.2,
-//                                        decoration: BoxDecoration(
-//                                          //border: Border.all(width: 2, color: Colors.white70),
-////              color: widget.selectprice == true
-//                                          color: curIndex == index
-//                                              ? Colors.blue.withOpacity(0.7)
-//                                              : Colors.white24,
-//                                          borderRadius:
-//                                              BorderRadius.circular(15.0),
-//                                        ),
-//                                        child: Center(
-//                                          child: Text(pricecake[index],
-//                                              style: GoogleFonts.pacifico(
-//                                                  fontSize: 25,
-//                                                  color: curIndex == index
-//                                                      ? Colors.white
-//                                                      : Colors.black)
-////                    color: widget.selectprice == true ? Colors.white : Colors.black),
-//                                              ),
-//                                        ),
-//                                      ),
-//                                    ),
-//                                  ),
-//                                  Positioned(
-//                                      top: 10,
-//                                      right: 10,
-//                                      child: curIndex == index
-//                                          ? FaIcon(
-//                                              FontAwesomeIcons.checkCircle,
-//                                              color: Colors.white,
-//                                              size: 25,
-//                                            )
-//                                          : FaIcon(
-//                                              FontAwesomeIcons.circle,
-//                                              color: Colors.white,
-//                                              size: 25,
-//                                            ))
-//                                ],
-//                              );
-//                            },
-//                          ),
-//                        ),
-//
-//                      ),
                       SliverList(
-                        delegate: SliverChildBuilderDelegate((_,index){
-                         return Stack(
+                        delegate: SliverChildBuilderDelegate((_, index) {
+                          return Stack(
                             children: [
                               InkWell(
                                 onTap: () {
                                   setState(() {
                                     curIndex = index;
-                                    _priceAnimationController.reverse(from: 1.0);
+                                    _priceAnimationController.reverse(
+                                        from: 1.0);
                                   });
-
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -688,23 +534,20 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                     height: size.height * 0.07,
                                     //width: size.width * 0.2,
                                     decoration: BoxDecoration(
-                                      //border: Border.all(width: 2, color: Colors.white70),
-//              color: widget.selectprice == true
                                       color: curIndex == index
                                           ? Colors.blue.withOpacity(0.7)
                                           : Colors.white24,
-                                      borderRadius:
-                                      BorderRadius.circular(15.0),
+                                      borderRadius: BorderRadius.circular(15.0),
                                     ),
                                     child: Center(
-                                      child: Text(pricecake[index],
+                                      child: Text("${pricecake[index]}\$",
                                           style: GoogleFonts.pacifico(
                                               fontSize: 25,
                                               color: curIndex == index
                                                   ? Colors.white
                                                   : Colors.black)
-//                    color: widget.selectprice == true ? Colors.white : Colors.black),
-                                      ),
+//
+                                          ),
                                     ),
                                   ),
                                 ),
@@ -714,20 +557,19 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                                   right: 10,
                                   child: curIndex == index
                                       ? FaIcon(
-                                    FontAwesomeIcons.checkCircle,
-                                    color: Colors.white,
-                                    size: 25,
-                                  )
+                                          FontAwesomeIcons.checkCircle,
+                                          color: Colors.white,
+                                          size: 25,
+                                        )
                                       : FaIcon(
-                                    FontAwesomeIcons.circle,
-                                    color: Colors.white,
-                                    size: 25,
-                                  ))
+                                          FontAwesomeIcons.circle,
+                                          color: Colors.white,
+                                          size: 25,
+                                        ))
                             ],
                           );
-                        },childCount: pricecake.length),
+                        }, childCount: pricecake.length),
                       ),
-
                     ],
                   )),
             ),
@@ -760,5 +602,55 @@ class buildHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
     return true;
+  }
+}
+
+class SearchData extends SearchDelegate<Text> {
+  final List<String>pricecake;
+
+  SearchData(this.pricecake);
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    // TODO: implement buildActions
+    return [
+      IconButton(
+        onPressed: () {
+          query = "";
+        },
+        icon: Icon(
+          Icons.clear,
+          color: Colors.black,
+        ),
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // TODO: implement buildLeading
+    return IconButton(
+      onPressed: () {
+        close(context, null);
+      },
+      icon: Icon(
+        Icons.arrow_back_ios,
+        color: Colors.black,
+      ),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+    Size size = MediaQuery.of(context).size;
+    return ListView.builder(itemCount: pricecake.length,itemBuilder: (context, int index){
+      return PriceItems(pricecake: pricecake[index]);
+    },);
   }
 }
