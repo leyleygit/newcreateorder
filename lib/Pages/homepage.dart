@@ -181,11 +181,12 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                if (_priceAnimation.value == 0) {
-                                  _priceAnimationController.forward(from: 0.0);
-                                } else {
-                                  _priceAnimationController.reverse(from: 1.0);
-                                }
+                                // if (_priceAnimation.value == 0) {
+                                //   _priceAnimationController.forward(from: 0.0);
+                                // } else {
+                                //   _priceAnimationController.reverse(from: 1.0);
+                                // }
+                                showSearch(context: context, delegate: SearchData(pricecake));
                               });
                             },
                             child: Text(
@@ -478,102 +479,102 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
               ),
             ),
           ),
-          Transform(
-            transform: Matrix4.translationValues(
-                size.width - (size.width * _priceAnimation.value), 0.0, 0.0),
-            child: GestureDetector(
-              onTap: () {
-                if (desFocusprice.hasFocus) {
-                  setState(() {
-                    desFocusprice.unfocus();
-                  });
-                } else {
-                  return null;
-                }
-              },
-              child: Container(
-                  width: size.width,
-                  height: size.height,
-                  //color: Colors.white,
-                  color: Color(0xff131313),
-                  child: CustomScrollView(
-                    slivers: <Widget>[
-                      SliverAppBar(
-                        //backgroundColor: Colors.white,
-                        backgroundColor: Color(0xff131313),
-                        pinned: true,
-                        centerTitle: true,
-                        title: IconButton(
-                          onPressed: () {
-                            showSearch(
-                                context: context, delegate: SearchData(
-                                pricecake
-                            ));
-                          },
-                          icon: Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      SliverList(
-                        delegate: SliverChildBuilderDelegate((_, index) {
-                          return Stack(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    curIndex = index;
-                                    _priceAnimationController.reverse(
-                                        from: 1.0);
-                                  });
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    height: size.height * 0.07,
-                                    //width: size.width * 0.2,
-                                    decoration: BoxDecoration(
-                                      color: curIndex == index
-                                          ? Colors.blue.withOpacity(0.7)
-                                          : Colors.white24,
-                                      borderRadius: BorderRadius.circular(15.0),
-                                    ),
-                                    child: Center(
-                                      child: Text("${pricecake[index]}\$",
-                                          style: GoogleFonts.pacifico(
-                                              fontSize: 25,
-                                              color: curIndex == index
-                                                  ? Colors.white
-                                                  : Colors.black)
-//
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                  top: 10,
-                                  right: 10,
-                                  child: curIndex == index
-                                      ? FaIcon(
-                                          FontAwesomeIcons.checkCircle,
-                                          color: Colors.white,
-                                          size: 25,
-                                        )
-                                      : FaIcon(
-                                          FontAwesomeIcons.circle,
-                                          color: Colors.white,
-                                          size: 25,
-                                        ))
-                            ],
-                          );
-                        }, childCount: pricecake.length),
-                      ),
-                    ],
-                  )),
-            ),
-          ),
+//           Transform(
+//             transform: Matrix4.translationValues(
+//                 size.width - (size.width * _priceAnimation.value), 0.0, 0.0),
+//             child: GestureDetector(
+//               onTap: () {
+//                 if (desFocusprice.hasFocus) {
+//                   setState(() {
+//                     desFocusprice.unfocus();
+//                   });
+//                 } else {
+//                   return null;
+//                 }
+//               },
+//               child: Container(
+//                   width: size.width,
+//                   height: size.height,
+//                   //color: Colors.white,
+//                   color: Color(0xff131313),
+//                   child: CustomScrollView(
+//                     slivers: <Widget>[
+//                       SliverAppBar(
+//                         //backgroundColor: Colors.white,
+//                         backgroundColor: Color(0xff131313),
+//                         pinned: true,
+//                         centerTitle: true,
+//                         title: IconButton(
+//                           onPressed: () {
+//                             showSearch(
+//                                 context: context, delegate: SearchData(
+//                                 pricecake
+//                             ));
+//                           },
+//                           icon: Icon(
+//                             Icons.search,
+//                             color: Colors.white,
+//                           ),
+//                         ),
+//                       ),
+//                       SliverList(
+//                         delegate: SliverChildBuilderDelegate((_, index) {
+//                           return Stack(
+//                             children: [
+//                               InkWell(
+//                                 onTap: () {
+//                                   setState(() {
+//                                     curIndex = index;
+//                                     _priceAnimationController.reverse(
+//                                         from: 1.0);
+//                                   });
+//                                 },
+//                                 child: Padding(
+//                                   padding: const EdgeInsets.all(8.0),
+//                                   child: Container(
+//                                     height: size.height * 0.07,
+//                                     //width: size.width * 0.2,
+//                                     decoration: BoxDecoration(
+//                                       color: curIndex == index
+//                                           ? Colors.blue.withOpacity(0.7)
+//                                           : Colors.white24,
+//                                       borderRadius: BorderRadius.circular(15.0),
+//                                     ),
+//                                     child: Center(
+//                                       child: Text("${pricecake[index]}\$",
+//                                           style: GoogleFonts.pacifico(
+//                                               fontSize: 25,
+//                                               color: curIndex == index
+//                                                   ? Colors.white
+//                                                   : Colors.black)
+// //
+//                                           ),
+//                                     ),
+//                                   ),
+//                                 ),
+//                               ),
+//                               Positioned(
+//                                   top: 10,
+//                                   right: 10,
+//                                   child: curIndex == index
+//                                       ? FaIcon(
+//                                           FontAwesomeIcons.checkCircle,
+//                                           color: Colors.white,
+//                                           size: 25,
+//                                         )
+//                                       : FaIcon(
+//                                           FontAwesomeIcons.circle,
+//                                           color: Colors.white,
+//                                           size: 25,
+//                                         ))
+//                             ],
+//                           );
+//                         }, childCount: pricecake.length),
+//                       ),
+//                     ],
+//                   )),
+//             ),
+//           ),
         ],
       ),
     );
@@ -606,6 +607,7 @@ class buildHeaderDelegate extends SliverPersistentHeaderDelegate {
 }
 
 class SearchData extends SearchDelegate<Text> {
+  final int curIndex = 0;
   final List<String>pricecake;
 
   SearchData(this.pricecake);
@@ -631,6 +633,7 @@ class SearchData extends SearchDelegate<Text> {
     return IconButton(
       onPressed: () {
         close(context, null);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomepage()));
       },
       icon: Icon(
         Icons.arrow_back_ios,
@@ -650,7 +653,7 @@ class SearchData extends SearchDelegate<Text> {
     // TODO: implement buildSuggestions
     Size size = MediaQuery.of(context).size;
     return ListView.builder(itemCount: pricecake.length,itemBuilder: (context, int index){
-      return PriceItems(pricecake: pricecake[index]);
+      return PriceItems(pricecake: pricecake[index],index: curIndex);
     },);
   }
 }

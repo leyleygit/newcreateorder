@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:new_createorder/Pages/homepage.dart';
 
 class PriceItems extends StatefulWidget {
   final int index;
@@ -24,6 +25,7 @@ class _PriceItemsState extends State<PriceItems> {
           onTap: (){
             setState(() {
               widget.oncheck = ! widget.oncheck;
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomepage()));
             });
           },
           child: Padding(
