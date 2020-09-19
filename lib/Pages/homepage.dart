@@ -142,6 +142,9 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
   FocusNode desFocus = FocusNode();
   FocusNode desFocusprice = FocusNode();
   TextEditingController desController = TextEditingController();
+  String q = "";
+  List<String>endquery;
+  var selectedindex = 0;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -487,6 +490,13 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                     title: Container(
                       height: size.height * 0.05,
                       child: TextField(
+                        onChanged: (val){
+                          setState(() {
+                            q = val;
+                            endquery = pricecake.where((e) => e.startsWith(q)).toList();
+                          });
+                        },
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: "Search here",
                           hintStyle: TextStyle(color: Colors.white70),
@@ -506,13 +516,59 @@ class _MyHomepageState extends State<MyHomepage> with TickerProviderStateMixin {
                      delegate: SliverChildBuilderDelegate(
                          (context, index)=> Padding(
                            padding: const EdgeInsets.all(8.0),
-                           child: Container(
-                             height: size.height * 0.05,
-                             width: size.width,
-                             color: Colors.purple,
+                           child: Stack(
+                             children: [
+                               InkWell(
+                                 onTap: () {
+                                   setState(() {
+                                      selectedindex = index;
+                                   });
+                                 },
+                                 child: Padding(
+                                   padding: const EdgeInsets.all(8.0),
+                                   child: Container(
+                                     height: size.height * 0.07,
+                                     //width: size.width * 0.2,
+                                     decoration: BoxDecoration(
+                                       color: selectedindex == index
+                                           ? Colors.blue.withOpacity(0.7)
+                                           : Colors.white24,
+                                       borderRadius: BorderRadius.circular(15.0),
+                                     ),
+                                     child: Center(
+                                       child: q == "" ?Text(pricecake[index],
+                                           style: GoogleFonts.pacifico(
+                                               fontSize: 25,
+                                               color: selectedindex == index ?Colors.white:Colors.black
+                                           )
+                                       ):Text(endquery[index],
+                                           style: GoogleFonts.pacifico(
+                                               fontSize: 25,
+                                               color: selectedindex == index ?Colors.white:Colors.black
+                                           )
+                                       ),
+                                     ),
+                                   ),
+                                 ),
+                               ),
+                               Positioned(
+                                   top: 10,
+                                   right: 10,
+                                   child: selectedindex == index
+                                       ? FaIcon(
+                                     FontAwesomeIcons.checkCircle,
+                                     color: Colors.white,
+                                     size: 25,
+                                   )
+                                       : FaIcon(
+                                     FontAwesomeIcons.circle,
+                                     color: Colors.white,
+                                     size: 25,
+                                   ))
+                             ],
                            ),
                          ),
-                          childCount: 20
+                          childCount: q == "" ?pricecake.length:endquery.length
                      ),
                    )
                 ],
